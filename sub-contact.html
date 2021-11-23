@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+	<title>project1</title>
+		<meta charset="utf-8">
+		<link href="css/common.css" rel="stylesheet">
+		<link href="css/sub-contact.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+		<script src="js/jquery-3.3.1.min.js"></script>
+		
+	<body>
+		<!-- skip navigation -->
+		<dl id="access">
+			<dt>바로가기 및 건너띄기 링크</dt>
+			<dd><a href="#contents">본문바로가기</a></dd>
+			<dd><a href="#navigation">주메뉴 바로가기</a></dd>
+		</dl>
+		<hr>
+		
+		<div id="big-box">
+			<header>
+			<div id="header">
+				<div class="nav">
+					<h2 class="readonly">주메뉴</h2>
+						<ul class="nav-menu">
+						<li><a href="sub1.html">ABOUT EL WIDE</a></li>
+						<li><a href="sub2.html">MUSIC</a></li>
+						<li><a href="sub3.html">MEDIA</a></li>
+						<li><a href="sub4.html">CULTURE</a></li>
+						</ul>
+				<div class="logo">
+					<h1 class="el-logo"><a href="index.html"><img src="images/elwide-logo.svg" width="88" height="88"></a></h1>
+				</div>
+				<div class="side-bar">
+					<div class="side-menu">
+						<ul>
+							<li><a href="http://www.facebook.com/elmusickorea" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href="https://blog.naver.com/elmusicstudio" target="_blank"><i class="fab fa-blogger-b"> </i></a></li>
+							<li><a href="https://www.youtube.com/channel/UCkoJ_TsGn-WqDVWEzGnhfcA"target="_blank"
+							><i class="fab fa-youtube"> </i></a></li>
+							<li><a href="login.html"><i class="fas fa-user"></i></a></li>
+						</ul>
+					</div>
+					<div class="side-text">
+						 <ul>
+							<li>CONNECT WITH WIDE</li>
+						 </ul>
+					</div>
+				</div>
+				</div>
+			</div>
+			</header>
+		</div>
+		
+		<!--  header end -->
+		
+			<div class="contact-big-box">
+			
+					<div class="contact-box">
+					<h2>Let’s Work<br>Together</h2>
+					<p>―</p>
+					<h3>CONTACT EL WIDE CORPORATION<br><span>업무 제휴 문의</span></h3>
+					</div>
+					
+					<div class="table-box">
+						<form name="emailsend" method="post" action="logincheck.html" >
+							<fieldset>
+							<legend>이메일보내기</legend>
+							
+								<p><label for="name" class="readonly">이름 입력</label><input type="text" name="name" placeholder="이름" class="contact"></p>
+								<p><label for="phone" class="readonly">연락처 입력</label><input type="text" name="phone" placeholder="연락처" class="contact" ></p>
+								<p><label for="email" class="readonly">이메일 입력</label><input type="text" name="email" placeholder="E-Mail" class="contact"></p>
+								<p><label for="Contents" class="readonly">내용 입력</label><input type="text" name="Contents" placeholder="의뢰하실 내용을 입력해 주세요." class="contents"></p>
+								
+								<p><input type="button" value="sumbit" class="sumbit" onClick="send();"></p>
+							</fieldset>
+						</form>
+					</div>
+				
+				<div class="map-box">
+					<p class="map-photo"></p>
+					<p class="contact-photo"></p>
+				</div>
+				
+			</div>
+		
+		<!-- sub page start -->
+	
+		
+		
+		
+		<!--  footer start  -->
+		<div id="footer">
+			<div class="footer-text">
+				<ul class="sub-logo">
+					<li><a href="index.html" alt="서브로고">EL WIDE</a></li>
+				</ul>
+				
+				<ul class="copy">
+					<li>Copyright ⓒ EL WIDE. All Rights Reserved.</li>
+				</ul>
+			</div>
+		</div>
+		</div>
+	
+		<script>
+			function send() {
+				if(emailsend.name.value==""){
+					alert("이름을 입력해주세요");
+					(emailsend.name.pocus);
+					return;
+				}
+				if(emailsend.phone.value==""){
+					alert("연락 받으실 연락처를 입력해주세요");
+					(emailsend.phone.pocus);
+					return;
+				}
+				if(emailsend.email.value==""){
+					alert("연락 받으실 이메일을 입력해주세요");
+					(emailsend.email.pocus);
+					return;
+				}
+				if(emailsend.Contents.value==""){
+					alert("연락 받으실 이메일을 입력해주세요");
+					(emailsend.Contents.pocus);
+					return;
+				}
+				emailsend.submit();
+			}
+			
+		</script>
+	
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
