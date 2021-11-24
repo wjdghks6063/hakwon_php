@@ -2,16 +2,22 @@
     include "common/dbconnect.php";
 
     $no = $_POST["t_no"];
+	$t_page = $_POST["t_page"];
+
     $query="select a.title, a.content, a.attach, b.name,a.reg_id, a.reg_date from h_notice a, h_member b where a.reg_id = b.id and a.no='$no'";
     $result = mysqli_query($connect,$query);
 	$row = mysqli_fetch_array($result);
     if($session_level !="top"){
+	
+		echo $t_page;
+		echo $no;	
 ?>
     <script>
     alert("관리자전용 화면입니다.");
     </script>
     
 <?}?>
+
 
 		
 		<!--  header end -->
@@ -30,6 +36,8 @@
 			
 			<form name="notice" enctype="multipart/form-data">
                 <input type="hidden" name="t_no" value="<?=$no?>"
+				<input type="hidden" name="t_page" value="<?=$t_page?>">
+
 					<h2 class="readonly">제목, 첨부파일, 내용을 작성합니다</h2>
 				
 					<fieldset>

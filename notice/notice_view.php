@@ -1,7 +1,9 @@
 <?
 	include "common/common_header.php";
 	include "common/dbconnect.php";
-	$no = $_POST["t_no"];
+
+	$no 	= $_POST["t_no"];
+	$t_page = $_POST["t_page"];
 
 	$queryHit =" update h_notice ".
 				"set hit = hit + 1 ".
@@ -11,6 +13,9 @@
 	$query="select a.title, a.content, a.attach, b.name, a.reg_date from h_notice a, h_member b where a.reg_id = b.id and a.no='$no'";
 	$result = mysqli_query($connect,$query);
 	$row = mysqli_fetch_array($result);
+
+	echo $t_page;
+	echo $no;
 ?>
 		
 		<!--  header end -->
@@ -35,10 +40,16 @@
 	}
 </style>			
 		<!-- cont start-->
-		<form name="notice">
-			<input type="hidden" name="t_no" value="<?=$no?>">
-			<input type="hidden" name="t_attach" value="<?=$row['attach']?>">
-		</form>
+<form name="notice">
+	<input type="hidden" name="t_no" value="<?=$no?>">
+	<input type="hidden" name="t_page" value="<?=$t_page?>">
+	<input type="hidden" name="t_attach" value="<?=$row['attach']?>">
+</form>
+
+<form name ="goBackPage">
+	<input type="hidden" name="t_page" value="<?=$t_page?>">
+</form>
+
 		<div class="cont-box">
 			<h3><?=$row["title"]?><br>
 				<span><?=$row["reg_date"]?>/<?=$row["name"]?></span></h3>
@@ -101,7 +112,7 @@
 		
 		<div class="list">
 			<a href="sub-contact.html">도움</a>&nbsp;&nbsp;
-			<a href="javascript:history.back();">목록</a>&nbsp;&nbsp; <!--이전화면-->
+			<a href="javascript:goBack()">목록</a>&nbsp;&nbsp; <!--이전화면-->
 			<?if($session_level == 'top'){?>
 			<a href="javascript:goUpdate()">수정</a>&nbsp;&nbsp; <!--이전화면-->
 			<a href="javascript:goDelete()">삭제</a>&nbsp;&nbsp; <!--이전화면-->
@@ -122,7 +133,12 @@
 				notice.method="post";
 				notice.action="db_notice_delete.php";
 				notice.submit();
+				}
 			}
+			function goBack(){
+				goBackPage.method ="post";
+				goBackPage.action ="notice_list.php";
+				goBackPage.submit();
 			}
 		</script>
 		

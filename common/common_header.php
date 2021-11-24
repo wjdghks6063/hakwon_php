@@ -1,4 +1,7 @@
 <?
+	header("Cache-Control: no cache"); //뒤로 가기 누를시 페이지 양식 제출뜨면서 에러 나기 때문에 뒤로 가기 버튼 오류 방지
+	session_cache_limiter("private_no_expire");
+
 	session_start();
 	$session_name 	= $_SESSION["session_name"];
 	$session_id 	= $_SESSION["session_id"];
@@ -14,6 +17,8 @@
 		<link href="/css/join.css" rel="stylesheet">
 		<link href="/css/sub-notice.css" rel="stylesheet">	
 		<link href="/css/notice-cont.css" rel="stylesheet">
+		<link href="/css/sub-news.css" rel="stylesheet">
+		<link href="/css/sub-news-1.css" rel="stylesheet">
 		<link href="/css/sub-faq.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
 		<script src="/js/jquery-3.3.1.min.js"></script>

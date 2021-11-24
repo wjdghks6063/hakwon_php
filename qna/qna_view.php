@@ -1,7 +1,9 @@
 <?
 	include "common/common_header.php";
 	include "common/dbconnect.php";
-	$no = $_POST["t_no"];
+	
+	$no 	= $_POST["t_no"];
+	$t_page = $_POST["t_page"];
 
 	$queryHit =" update h_qna ".
 				"set hit = hit + 1 ".
@@ -36,9 +38,14 @@
 	}
 </style>			
 		<!-- cont start-->
-		<form name="qna">
-			<input type="hidden" name="t_no" value="<?=$no?>">
-		</form>
+<form name="qna">
+	<input type="hidden" name="t_no" value="<?=$no?>">
+</form>
+
+<form name ="goBackPage">
+	<input type="hidden" name="t_page" value="<?=$t_page?>">
+</form>
+
 		<div class="cont-box">
 			<h3><span class="waiting">질문</span> <?=$row["q_title"]?><br>
 				<span><?=$row["q_reg_date"]?>/<?=$row["b_name"]?></span></h3>
@@ -124,7 +131,7 @@
 			<a href="javascript:goAnswerUpdate()">답변 수정</a>&nbsp; <!-- 질문 답변 수정 -->
 			<a href="javascript:goAnswerDelete()">답변 삭제</a>&nbsp; <!-- 질문 답변 삭제 -->
 		<?}?>
-			<a href="javascript:history.back();">목록</a>&nbsp; <!--이전화면-->
+			<a href="javascript:goBack()">목록</a>&nbsp;&nbsp; <!--이전화면--> <!--이전화면-->
 		</div>
 		
 		
@@ -159,6 +166,11 @@
 				qna.action="db_qna_answerdelete.php";
 				qna.submit();
 				}
+			}
+			function goBack(){
+				goBackPage.method ="post";
+				goBackPage.action ="qna_list.php";
+				goBackPage.submit();
 			}
 		</script>
 		

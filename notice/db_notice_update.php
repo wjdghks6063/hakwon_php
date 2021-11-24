@@ -3,6 +3,8 @@
     include "common/dbconnect.php";
 
     $no = $_POST["t_no"];
+    $t_page = $_POST["t_page"];
+
     $attach_dir =$_SERVER["DOCUMENT_ROOT"]."/file_room/notice/"; 
     $attach_name = $_FILES["t_attach"]["name"];  
     $attach_tmp_name = $_FILES["t_attach"]["tmp_name"];   
