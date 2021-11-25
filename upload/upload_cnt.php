@@ -32,6 +32,8 @@
 		$msg = "업로드되었습니다.";
 	}
 	echo $msg;
+
+	echo $file_name;
 }
 
 ?>

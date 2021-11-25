@@ -74,11 +74,10 @@
 				<input type="hidden" name="t_content">
 			</form>
 			
-		<div class="page-number">
-		
+			<div class="page-number">
 			<?if($session_level == 'top'){?>	
-				<a href="faq_list.php" class="btn-write">목록</a>
-				<a href="faq_write.php" class="btn-write1">글쓰기</a>
+				<a href="faq_list.php" class="btn-write1">목록</a>
+				<a href="faq_write.php" class="btn-write2">글쓰기</a>
 			<?}?>
 			</div>
 			

@@ -16,13 +16,13 @@
 <script>
 	function goUpdate(){
 		notice.method="post";
-		notice.action="notice_update.php";
+		notice.action="news_update.php";
 		notice.submit();
 	}
 	function goDelete(){
 		if(confirm("정말 삭제하시겠습니까?")){
 		notice.method="post";
-		notice.action="db_notice_delete.php";
+		notice.action="db_news_delete.php";
 		notice.submit();
 		}
 	}
@@ -63,7 +63,7 @@
 			</div>
 
 			
-			<div class="list">
+			<div class="list1">
 			<?if($session_level == 'top'){?>	
 				<a href="javascript:goUpdate()">수정</a>&nbsp;&nbsp; <!--이전화면-->
 				<a href="javascript:goDelete()">삭제</a>&nbsp;&nbsp; <!--이전화면-->

@@ -42,13 +42,25 @@ body        {font-family:Nanum Barun Gothic; background:#6dacb8;}
 
 
  /*page-number css*/
+
+/* 기본 작업 
 .page-number {width:1200px; margin:0 auto; background:#fff; text-align:center; line-height:10px; font-size:14px; padding:70px 0; }
 .page-number .icon {color:#6dacb8; }
 .page-number .more , .page-number .icon {border:none;}
 .page-number a {border:1px solid #999; padding:2px 5px; margin:5px;}
 .page-number .on {background-color:#6dacb8; color:#fff;}
 .page-number .btn-write {width:80px; height:30px; background-color:#fff; float:right; background-color: #6dacb8; margin-right:50px; font-size:15px; line-height:25px; color:#fff; border:none;}
-.page-number .btn-write1 {width:80px; height:30px; background-color:#fff; float:right; background-color: #6dacb8; margin-right:10px; font-size:15px; line-height:25px; color:#fff; border:none;}
+.page-number .btn-write1 {width:80px; height:30px; background-color:#fff; float:right; background-color: #6dacb8; margin-right:60px; font-size:15px; line-height:25px; color:#fff; border:none;}
+.page-number .btn-write2 {width:80px; height:30px; background-color:#fff; float:right; background-color: #6dacb8; margin-right:10px; font-size:15px; line-height:25px; color:#fff; border:none;}
+*/
+.page-number {width:1200px; margin:0 auto; background:#fff; text-align:center; line-height:10px; font-size:14px; padding:40px 0; }
+.page-number .icon {color:#6dacb8; }
+.page-number .more , .page-number .icon {border:none;}
+.page-number a {border:1px solid #999; padding:2px 5px; margin:5px;}
+.page-number .on {background-color:#6dacb8; color:#fff;}
+.page-number .btn-write {width:80px; height:30px; background-color:#fff; float:right; background-color: #6dacb8; margin-right:50px; font-size:15px; line-height:25px; color:#fff; border:none;}
+.page-number .btn-write1 {width:80px; height:30px; background-color:#fff; float:right; background-color: #6dacb8; margin-right:60px; font-size:15px; line-height:25px; color:#fff; border:none;}
+.page-number .btn-write2 {width:80px; height:30px; background-color:#fff; float:right; background-color: #6dacb8; margin-right:10px; font-size:15px; line-height:25px; color:#fff; border:none;}
  
  /* footer css */
  

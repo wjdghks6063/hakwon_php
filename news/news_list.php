@@ -2,6 +2,17 @@
 	include "common/common_header.php";
 	include "common/dbconnect.php";
 
+/**************************page setting********************************/
+	/*pagingSetting.php와 같은 변수명으로 사용해야 작동 하기 때문에 양쪽의 변수명을 맞춰준다. */
+
+	$countTotal =" select * from h_news "; /*페이지를 정할 db 명 */ 
+	$countOnePage = "9"; // 한 페이지당 보여줄 목록 수 (?)행 보여주겠다.
+	$perblock = 5;		 // 한 페이지당 보여줄 페이지 번호 수 < 1 2 3 4 5 >
+
+	include "common/pagingSetting.php"; //변수명들을 넣어줘야 작동되기 때문에 변수명 아래쪽에 include 해준다.
+	$t_page =$_POST['t_page']; // view에 갔다가 목록이나 뒤로 가기를 했을 때 현재 페이징 넘버로 가질 수 있게 해준다.
+/**********************************************************************/
+
 	$query ="select no, title, attach from h_news order by no desc ";
 	$result = mysqli_query($connect,$query);
 										
@@ -61,126 +72,11 @@
 				</ul>
 			<?}?>	
 				
-				<ul class="news">
-					<li>
-						<a href="sub-news-1.html">
-							<span class="img"><img src="/images/news4.jpg" alt="뉴스1"></span>
-							<p>‘질투의 화신’ 센스만점 OST, 스페셜 앨범 10일 출시</p>
-							
-							<span class="size-up"></span>
-						</a>
-					</li>
-				</ul>
-				
-				<ul class="news">
-					<li>
-						<a href="sub-news-1.html">
-							<span class="img"><img src="/images/news5.jpg" alt="뉴스1" ></span>
-							<p>싱어송라이터 마이큐(MY Q),<br>
-							싱글 앨범 ‘e v e r Y d a y’ 발표</p>
-							
-							<span class="size-up"></span>
-						</a>
-					</li>
-				</ul>
-				
-				<ul class="news">
-					<li>
-						<a href="sub-news-1.html">
-							<span class="img"><img src="/images/news6.jpg" alt="뉴스1" ></span>
-							<p>‘질투의 화신’ 미공개 OST, 오늘(3일) 정오 기습 발매</p>
-							
-							<span class="size-up"></span>
-						</a>
-					</li>
-				</ul>
-				
-				<ul class="news">
-					<li>
-						<a href="sub-news-1.html">
-							<span class="img"><img src="/images/news7.jpg" alt="뉴스1" ></span>
-							<p>‘피리부는 사나이’ 두 번째 OST 공개…<br>
-							‘두 가지 버전’으로 색다른 재미</p>
-							
-							<span class="size-up"></span>
-						</a>
-					</li>
-				</ul>
-				
-				<ul class="news">
-					<li>
-						<a href="sub-news-1.html">
-							<span class="img"><img src="/images/news2.jpg" alt="뉴스1"></span>
-							<p>언노운드레스, 감성캐롤 'On Christmas Day’<br>
-							16일 정오 발매…'마음을 위로하는 음악’</p>
-							
-							<span class="size-up"></span>
-						</a>
-					</li>
-				</ul>
-				
-				<ul class="news">
-					<li>
-						<a href="sub-news-1.html">
-							<span class="img"><img src="/images/news4.jpg" alt="뉴스1"></span>
-							<p>‘질투의 화신’ 센스만점 OST, 스페셜 앨범 10일 출시</p>
-							
-							<span class="size-up"></span>
-						</a>
-					</li>
-				</ul>
-				
-				<ul class="news">
-					<li>
-						<a href="sub-news-1.html">
-							<span class="img"><img src="/images/news3.jpg" alt="뉴스1"span>
-							<p>싱어송라이터 ‘마이큐’, 29일 싱글앨범<br>‘I must be a fool’ 발표</p>
-							
-							<span class="size-up"></span>
-						</a>
-					</li>
-				</ul>
-				
-				<ul class="news">
-					<li>
-						<a href="sub-news-1.html">
-							<span class="img"><img src="/images/news5.jpg" alt="뉴스1" ></span>
-							<p>싱어송라이터 마이큐(MY Q),<br>
-							싱글 앨범 ‘e v e r Y d a y’ 발표</p>
-							
-							<span class="size-up"></span>
-						</a>
-					</li>
-				</ul>
-				
-				<ul class="news">
-					<li>
-						<a href="sub-news-1.html">
-							<span class="img"><img src="/images/news6.jpg" alt="뉴스1" ></span>
-							<p>‘질투의 화신’ 미공개 OST, 오늘(3일) 정오 기습 발매</p>
-							
-							<span class="size-up"></span>
-						</a>
-					</li>
-				</ul>
-				
-				<ul class="news">
-					<li>
-						<a href="sub-news-1.html">
-							<span class="img"><img src="/images/news7.jpg" alt="뉴스1" ></span>
-							<p>‘피리부는 사나이’ 두 번째 OST 공개…<br>
-							‘두 가지 버전’으로 색다른 재미</p>
-							
-							<span class="size-up"></span>
-						</a>
-					</li>
-				</ul>
-				
-				
 			</div>
 			
-			<div class="page-number">
-				<a href="#" class="icon"><i class="fas fa-arrow-circle-left fa-lg"></i></a>
+			<div class="page-number1">
+		<?	include "common/pagingDisplay.php"; ?>	
+<!--			<a href="#" class="icon"><i class="fas fa-arrow-circle-left fa-lg"></i></a>
 				<a href="#" class="on">1</a>
 				<a href="#">2</a>
 				<a href="#">3</a>
@@ -192,10 +88,14 @@
 				<a href="#">9</a>
 				<a href="#" class="more">…</a>
 				<a href="#" class="icon"><i class="fas fa-arrow-circle-right fa-lg"></i></a>
-
+-->			
+			</div>
+			<div class="page-number">
 			<?if($session_level == 'top'){?>	
-				<a href="news_write.php" class="btn-write1">글쓰기</a>
+				<a href="news_write.php" class="btn-write">글쓰기</a>
+			
 			<?}?>
+			</div>
 		
 		</div>
 		

@@ -50,6 +50,9 @@ body        {font-family:Nanum Barun Gothic; background:#6dacb8;}
  .list a {border:2px solid #6dacb8; color:#444444; font-size:20px; padding:10px 20px; transition:all 0.5s;}
  .list a:hover {background:#6dacb8; color:#fff;}
 
+ .list1 {text-align:center; margin:20px 40px 150px 0px;}
+ .list1 a {border:2px solid #6dacb8; color:#444444; font-size:20px; padding:10px 20px; transition:all 0.5s;}
+ .list1 a:hover {background:#6dacb8; color:#fff;}
  
  /* footer css */
  

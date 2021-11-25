@@ -66,6 +66,12 @@ background:#eeeeee; padding:70px 25px 55px 25px; }
 .page-number .more , .page-number .icon {border:none;}
 .page-number a {border:1px solid #999; padding:2px 5px; margin:5px;}
 .page-number .on {background-color:#6dacb8; color:#fff;}
+/*faq-number css*/
+.page-number1 {width:1200px; margin:0 auto; background:#fff; text-align:center; line-height:10px; font-size:14px; padding-top:50px;}
+.page-number1 .icon {color:#6dacb8; }
+.page-number1 .more , .page-number .icon {border:none;}
+.page-number1 a {border:1px solid #999; padding:2px 5px; margin:5px;}
+.page-number1 .on {background-color:#6dacb8; color:#fff;}
 
 /* login css */
 .login-box {width:50%; margin:0 auto; background:#EFF8FB; overflow:hidden; padding:20px 40px; }

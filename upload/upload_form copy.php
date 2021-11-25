@@ -48,7 +48,7 @@
 	    <a href="javascript:" onclick="file_upload();" class="btn-_default" style="width: 150;height: 45px;">사진선택</a>
 	    <input type="file" id="input_imgs" multiple style="display:none" />
 		&nbsp;&nbsp;&nbsp;
-		<a href="javascript:" class="btn-_default" style="width: 150px; height: 45px;" onclick="file_submit();">전송하기</a>
+		<a href="javascript:void(0)" class="btn-_default" style="width: 150px; height: 45px;" onclick="file_submit();">전송하기</a>
 	</div>
 </div>
 <script type="text/javascript">
@@ -118,11 +118,8 @@ function file_submit()
     data.append("image_count", sel_files.length);
     if(sel_files.length < 1) 
 	{
-	alert("파일을 선택해주세요.")
+		alert("파일을 선택해주세요.")
         return;
-    }else if(sel_files.length > 1){
-		alert("한개의 사진만 첨부 가능합니다.");
-		return;
 	}
 	$.ajax({
 		url: "./upload_cnt.php",

@@ -93,7 +93,7 @@
 				</table>
 			</div>
 			
-			<div class="page-number">
+			<div class="page-number1">
 		<?	include "common/pagingDisplay.php"; ?>	
 <!--			<a href="#" class="icon"><i class="fas fa-arrow-circle-left fa-lg"></i></a>
 				<a href="#" class="on">1</a>
@@ -107,12 +107,14 @@
 				<a href="#">9</a>
 				<a href="#" class="more">…</a>
 				<a href="#" class="icon"><i class="fas fa-arrow-circle-right fa-lg"></i></a>
--->				
+-->			
+			</div>
+			<div class="page-number">
 			<?if($session_level == 'top'){?>	
 				<a href="notice_write.php" class="btn-write">글쓰기</a>
 			
 			<?}?>
-				</div>
+			</div>
 		
 		</div>
 		
