@@ -1,6 +1,6 @@
 <?
-	header("Cache-Control: no cache"); //뒤로 가기 누를시 페이지 양식 제출뜨면서 에러 나기 때문에 뒤로 가기 버튼 오류 방지
-	session_cache_limiter("private_no_expire");
+//	header("Cache-Control: no cache"); //뒤로 가기 누를시 페이지 양식 제출뜨면서 에러 나기 때문에 뒤로 가기 버튼 오류 방지
+//	session_cache_limiter("private_no_expire");
 
 	session_start();
 	$session_name 	= $_SESSION["session_name"];
@@ -49,9 +49,15 @@
 				<div class="side-bar">
 					<div class="side-menu">
 						<ul>
-							<li><a href="http://www.facebook.com/elmusickorea" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+							<li><a href="http://www.facebook.com/elmusickorea" target="_blank"><i class="fab fa-facebook-f"></i></a></li><!-- target="_blank" 새창으로 열기 -->
 							<li><a href="https://blog.naver.com/elmusicstudio" target="_blank"><i class="fab fa-blogger-b"> </i></a></li>
 							<li><a href="https://www.youtube.com/channel/UCkoJ_TsGn-WqDVWEzGnhfcA"target="_blank"><i class="fab fa-youtube"> </i></a></li>
+
+							<?	if($session_level == 'top' && $session_name){?>
+								<li><a href="/info/info_list.php"><i class="fas fa-search"> </i></a></li>
+							<?	}else if($session_name){?>
+								<li><a href="/info/info_view.php"><i class="fas fa-search"> </i></a></li>
+							<?	} ?>
 							<?	if($session_name){?>
 								<li><a href="/member/logout.php">
 									<i class="fas fa-sign-out-alt"></i></a></li>

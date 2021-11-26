@@ -15,15 +15,15 @@
 
 <script>
 	function goUpdate(){
-		notice.method="post";
-		notice.action="news_update.php";
-		notice.submit();
+		news.method="post";
+		news.action="news_update.php";
+		news.submit();
 	}
 	function goDelete(){
 		if(confirm("정말 삭제하시겠습니까?")){
-		notice.method="post";
-		notice.action="db_news_delete.php";
-		notice.submit();
+		news.method="post";
+		news.action="db_news_delete.php";
+		news.submit();
 		}
 	}
 	function goBack(){
@@ -33,7 +33,7 @@
 	}
 </script>
 		<!--  header end -->
-<form name="notice">
+<form name="news">
 	<input type="hidden" name="t_no" value="<?=$no?>">
 	<input type="hidden" name="t_page" value="<?=$t_page?>">
 	<input type="hidden" name="t_attach" value="<?=$row['attach']?>">

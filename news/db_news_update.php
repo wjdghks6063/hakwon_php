@@ -5,10 +5,9 @@
 	$no = $_POST["t_no"];
     $t_page = $_POST["t_page"];
 	
-	$attach_dir =$_SERVER["DOCUMENT_ROOT"]."/file_room/notice/";
+	$attach_dir =$_SERVER["DOCUMENT_ROOT"]."/file_room/news/";
 	$attach_name = $_FILES["t_attach"]["name"];
 	$attach_tmp_name = $_FILES["t_attach"]["tmp_name"];	
-	
 	//첨부했으면 
 	if($attach_name){
 		// 기존 첨부파일 삭제
@@ -29,7 +28,7 @@
 		$reg_id  = $_SESSION["session_id"];
 		$reg_date_time = date("Y-m-d H:i:s", time());	
 		
-		$query ="update h_notice ".
+		$query ="update h_news ".
 				" set title='$title', ".
 				" 	content='$content', ".
 				"   attach='$attach_db_name', ".
@@ -79,5 +78,5 @@
 ?>
 <script>
 	alert("<?=$msg?>");
-	location.href="notice_list.php";
+	location.href="news_list.php";
 </script>

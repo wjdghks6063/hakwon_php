@@ -2,20 +2,8 @@
 	include "common/common_header.php";
 	include "common/dbconnect.php";
 
-/**************************page setting********************************/
-/*pagingSetting.php와 같은 변수명으로 사용해야 작동 하기 때문에 양쪽의 변수명을 맞춰준다. */
-
-	$countTotal =" select * from h_faq "; /*페이지를 정할 db 명 */ 
-	$countOnePage = "5"; // 한 페이지당 보여줄 목록 수 (?)행 보여주겠다.
-	$perblock = 5;		 // 한 페이지당 보여줄 페이지 번호 수 < 1 2 3 4 5 >
-
-	include "common/pagingSetting.php"; //변수명들을 넣어줘야 작동되기 때문에 변수명 아래쪽에 include 해준다.
-	$t_page =$_POST['t_page']; // view에 갔다가 목록이나 뒤로 가기를 했을 때 현재 페이징 넘버로 가질 수 있게 해준다.
-/**********************************************************************/	
-
 	$query ="select a.title,a.content from h_faq a, h_member b ".
-			"where a.reg_id = b.id order by orderno asc ".
-			"limit $start, $end ";
+			"where a.reg_id = b.id order by orderno asc ";
 	$result = mysqli_query($connect,$query);
 								
 	$count = mysqli_num_rows($result);
@@ -61,7 +49,7 @@
 			</div>	
 
 		<div class="page-number1">
-		<?	include "common/pagingDisplay.php"; ?>	
+	<!--페이징 시 2페이지의 숫자값이 계속 변경됨 오류 해결 실패 <? include "common/pagingDisplay.php"; ?>	 -->
 <!--			<a href="#" class="icon"><i class="fas fa-arrow-circle-left fa-lg"></i></a>
 				<a href="#" class="on">1</a>
 				<a href="#">2</a>

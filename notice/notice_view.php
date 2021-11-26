@@ -14,8 +14,6 @@
 	$result = mysqli_query($connect,$query);
 	$row = mysqli_fetch_array($result);
 
-	echo $t_page;
-	echo $no;
 ?>
 		
 		<!--  header end -->
@@ -31,7 +29,7 @@
 			</div>
 <style>
 	.cont-box .img img{
-		width:500px;
+		width:500px; 
 	}
 	.viewCont{
 		white-space:pre-wrap;

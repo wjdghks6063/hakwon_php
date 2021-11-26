@@ -16,7 +16,7 @@ body        {font-family:Nanum Barun Gothic; background:#6dacb8;}
 #big-box .nav-menu li { font-family: 'Titillium Web'; padding:50px 20px 50px 20px; float:left;  font-size:15px; font-weight:600; letter-spacing:0.5px;}
 #big-box .nav-menu li a:hover {color:#76b7c0; transition:all 0.3s; }
 #big-box .nav .logo {float:left; width:220px; padding-top:20px; }
-#big-box .nav .logo .el-logo {padding-left:30px; text-align:center;}
+#big-box .nav .logo .el-logo {padding-left:0px; text-align:center;}
 #big-box .side-bar {width:400px; float:right; padding:50px 15px 50px 0;}
 .side-menu li {float:right; width:34px; height:34px; border-radius:100px; background:#87cedc; text-align:center; line-height:34px; margin-left:4px;}
 .side-menu li a {color:#fff; font-size:14px; padding:5px;}

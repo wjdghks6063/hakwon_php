@@ -1,23 +1,9 @@
 <?
 	include "common/common_header.php";
 	include "common/dbconnect.php";
-
-	$t_page = $_POST["t_page"];
-
-/**************************page setting********************************/
-/*pagingSetting.php와 같은 변수명으로 사용해야 작동 하기 때문에 양쪽의 변수명을 맞춰준다. */
-
-	$countTotal =" select * from h_faq "; /*페이지를 정할 db 명 */ 
-	$countOnePage = "5"; // 한 페이지당 보여줄 목록 수 (?)행 보여주겠다.
-	$perblock = 5;		 // 한 페이지당 보여줄 페이지 번호 수 < 1 2 3 4 5 >
-
-	include "common/pagingSetting.php"; //변수명들을 넣어줘야 작동되기 때문에 변수명 아래쪽에 include 해준다.
-	$t_page =$_POST['t_page']; // view에 갔다가 목록이나 뒤로 가기를 했을 때 현재 페이징 넘버로 가질 수 있게 해준다.
-/**********************************************************************/		
 	
 	$query ="select a.no,a.title,a.content,a.reg_id,a.reg_date from h_faq a, h_member b ".
-			"where a.reg_id = b.id order by orderno asc ".
-			"limit $start, $end ";
+			"where a.reg_id = b.id order by orderno asc ";
 	$result = mysqli_query($connect,$query);
 								
 	$count = mysqli_num_rows($result);
@@ -59,7 +45,7 @@
 							<tr>
 									<td colspan="2">
 									<input type="button" onClick="goUpdate('<?=$k?>','<?=$row["no"]?>')" value="수정" class="btn_right" >
-									<input type="button" onclick="goDelete('<?=$row["no"]?>')" value="삭제" class="btn_right">
+									<input type="button" onclick="goDelete('<?=$row['no']?>')" value="삭제" class="btn_right">
 									</td>
 							</tr>
 						</div>
