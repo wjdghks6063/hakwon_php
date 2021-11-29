@@ -31,6 +31,28 @@
 		goBackPage.action ="news_list.php";
 		goBackPage.submit();
 	}
+
+	
+	function count(type)  {
+			// 결과를 표시할 element
+			const resultElement = mem.point.value;
+			
+			// 현재 화면에 표시된 값
+			let number = Number(resultElement);
+			
+			// 더하기
+			if(type === '100') {
+				number = parseInt(resultElement) + 100;
+			}else if(type === '1000')  {
+				number = parseInt(resultElement) + 1000;
+			}else if(type === '10000')  {
+				number = parseInt(resultElement) + 10000;
+			}else if(type === '50000')  {
+				number = parseInt(resultElement) + 50000;
+			}
+			
+			mem.point.value = number;
+		}
 </script>
 		<!--  header end -->
 <form name="news">
@@ -56,7 +78,24 @@
 			<div class="contnews">
 				<h3><?=$row["title"]?><br>
 					<span> <?=$row["name"]?> | <?=$row["reg_date"]?> | 조회수 <?=$row["hit"]?> </span></h3>
-					<span class="img"><img src="/file_room/news/<?=$row["attach"]?>" alt="뉴스1" style="float:left; width:500px; height:500px; border:1px solid #EAEAEA; "></span>
+					<span class="img"><img src="/file_room/news/<?=$row["attach"]?>" alt="뉴스1" class="img" ">	
+									<div class="prod-buy-quantity">
+									<div class="prod-buy__quantity">
+										<div class="prod-quantity__form" name="count">
+											<input type="text" value="1" class="prod-quantity__input" id="point" maxlength="6" autocomplete="off" 
+												oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"> <!-- 숫자 외 값 들어오기 막기 -->
+											<div style="display:table-cell;vertical-align:top;">
+												<button class="prod-quantity__plus" type="button" onclick='count("plus")' value='+ 1'>수량더하기</button>
+												<button class="prod-quantity__minus" type="button" onclick='count("minus")'>수량빼기</button>
+												<div id='result'>1</div>
+												
+											</div>
+										</div>
+									</div>
+									
+									</div>
+					</span>	
+
 				<p class="txt">
 				<?=$row["content"]?>
 				</p>

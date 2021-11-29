@@ -20,7 +20,15 @@
 										
 	$count = mysqli_num_rows($result); 
 
-?>
+	if($session_level != 'top'){
+?>		
+	<script>
+		alert("관리자 화면 입니다.");
+		location.href="/";
+	</script>
+<?	
+}
+?>	
 		<!--  header end -->
 <script>
 	function goView(id){
@@ -36,7 +44,7 @@
 		pageForm.submit();
 	}
 	function goExit(id){
-		if(confirm("정말 삭제하시겠습니까?")){
+		if(confirm("정말 탈퇴시키겠습니까?")){
 		info.t_id.value=id;
 		info.method="post";
 		info.action="/member/db_member_exit.php";
@@ -58,7 +66,6 @@
 		<div class="notice">
 			<div class="sub-notice">
 			<h2><a href="/info/myinfo_view.php">MY INFO</a></h2>	
-			<h2><a href="/qna/qna_list.php"> QnA</a></h2>
 		<?	if($session_level == 'top') { ?>
 			<h2 class="color"><a href="/info/info_list.php"> <i class="fas fa-check"></i>MEMBER INFO</a></h2>
 			<h2><a href="/info/exit_list.php">EXIT INFO</a></h2>	
@@ -135,12 +142,6 @@
 				<a href="#" class="more">…</a>
 				<a href="#" class="icon"><i class="fas fa-arrow-circle-right fa-lg"></i></a>
 -->			
-			</div>
-			<div class="page-number">
-			<?if($session_level == 'top'){?>	
-				<a href="notice_write.php" class="btn-write">글쓰기</a>
-			
-			<?}?>
 			</div>
 		
 		</div>

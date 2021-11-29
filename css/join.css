@@ -52,7 +52,24 @@ body        {font-family:Nanum Barun Gothic; background:#6dacb8;}
 /*.name_phone .phone {width:72%;}*/
 .name_phone .certifi {cursor:pointer; width:20%; border:1px solid #e1e1e1; color:#6dacb8; letter-spacing:6px; }
 .name_phone input.email {width:33%;}
+.name_phone input.address {width:73%;}
+.name_phone input.level {width:67.5%;}
+.name_phone input.point {width:91%;}
 .name_phone select.email {width:22%; height:40px; }
+
+.name_phone input.orange {
+    width: 70px;
+    height: 32px;
+    border: 1px solid #e55707;
+    background-color: #f57842;
+    outline: none;
+    font-size: 13px;
+    text-align: center;
+    padding-left: 0;
+    color: #fff;
+    /* line-height: 30px; */
+    font-weight: bold;
+}
 
 .check {width:40%; margin:0 auto; text-align:center; background:#f1f1f1; padding:7px; margin-top:10px; padding:30px 0px;}
 .check input[type="radio"], .check input[type="checkbox"] {margin:10px 5px;}

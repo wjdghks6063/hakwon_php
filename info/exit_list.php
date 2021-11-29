@@ -20,7 +20,15 @@
 										
 	$count = mysqli_num_rows($result); 
 
-?>
+	if($session_level != 'top'){
+?>		
+	<script>
+		alert("관리자 화면 입니다.");
+		location.href="/";
+	</script>
+<?	
+	}
+?>	
 		<!--  header end -->
 <script>
 	function goView(id){
@@ -66,7 +74,6 @@
 		<div class="notice">
 			<div class="sub-notice">
 			<h2><a href="/info/myinfo_view.php">MY INFO</a></h2>	
-			<h2><a href="/qna/qna_list.php"> QnA</a></h2>
 		<?	if($session_level == 'top') { ?>
 			<h2><a href="/info/info_list.php">MEMBER INFO</a></h2>
 			<h2 class="color"><a href="/info/exit_list.php"><i class="fas fa-check"></i>EXIT INFO</a></h2>	

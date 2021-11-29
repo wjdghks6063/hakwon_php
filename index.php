@@ -43,6 +43,11 @@
 							<li><a href="https://blog.naver.com/elmusicstudio" target="_blank"><i class="fab fa-blogger-b"> </i></a></li>
 							<li><a href="https://www.youtube.com/channel/UCkoJ_TsGn-WqDVWEzGnhfcA"target="_blank"
 							><i class="fab fa-youtube"> </i></a></li>
+							<?if($_session_level == 'top' && $_session_name){?>
+								<li><a href="/info/info_list.php"><i class="fas fa-search"> </i></a></li>
+							<?	}else if($_session_name){?>
+								<li><a href="/info/myinfo_view.php"><i class="fas fa-search"> </i></a></li>
+							<?	} ?>
 							<? if($_session_name) {?>
 							<li><a href="/member/logout.php"><i class="fas fa-sign-out-alt"></i></a></li>
 							<? } else {?>	
@@ -51,13 +56,13 @@
 						</ul>
 					</div>
 					<div class="side-text">
-						 <ul>
+						<ul>
 						<? if($_session_name) {?>
 							<li><span style='color:black'><?=$_session_name?></span>님 환영합니다.</li>
 						<? } else {?>	
 							<li>CONNECT WITH WIDE</li>
 						<? } ?>	
-						 </ul>
+						</ul>
 					</div>
 				</div>
 				</div>

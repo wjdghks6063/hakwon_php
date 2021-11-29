@@ -56,7 +56,7 @@
 							<?	if($session_level == 'top' && $session_name){?>
 								<li><a href="/info/info_list.php"><i class="fas fa-search"> </i></a></li>
 							<?	}else if($session_name){?>
-								<li><a href="/info/info_view.php"><i class="fas fa-search"> </i></a></li>
+								<li><a href="/info/myinfo_view.php"><i class="fas fa-search"> </i></a></li>
 							<?	} ?>
 							<?	if($session_name){?>
 								<li><a href="/member/logout.php">

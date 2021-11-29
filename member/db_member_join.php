@@ -6,13 +6,15 @@
     $mobile = $_POST["t_mobile"];
     $email_1 = $_POST["t_email_1"];
     $email_2 = $_POST["t_email_2"];
+    $address_1 = $_POST["t_address_1"];
+    $address_2 = $_POST["t_address_2"];
     $info_yn = $_POST["t_info_yn"];
     $reg_date_time = date("y-m-d h:i:s", time());
 
     $query = "insert into h_member ".
-    "(id,password,name,mobile,email_1,email_2,info_yn,reg_date) ".
+    "(id,password,name,mobile,email_1,email_2,address_1,address_2,info_yn,reg_date) ".
     "values ".
-    "('$id','$password','$name','$mobile','$email_1','$email_2','$info_yn','$reg_date_time')";
+    "('$id','$password','$name','$mobile','$email_1','$email_2','$address_1','$address_2','$info_yn','$reg_date_time')";
     
     $result = mysqli_query($connect,$query);
     

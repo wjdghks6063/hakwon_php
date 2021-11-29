@@ -16,7 +16,7 @@
 		$tf = unlink($attach_dir.iconv("UTF-8","CP949",$del_file));
 
 		// 새로운 첨부파일
-		$attach_db_name = $no."_".$attach_name;
+		$attach_db_name = $no."_".$attach_name; //파일명이 변환과정에서 깨지므로 미리 원본 파일명을 빼둔다.
 		$attach_name = iconv("UTF-8","CP949",$attach_name);
 		$attach_name = $no."_".$attach_name;
 		$full_attach_info = $attach_dir.$attach_name;

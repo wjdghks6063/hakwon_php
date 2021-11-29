@@ -1,68 +1,26 @@
-<?php
+<?
+
+	include "common/dbconnect.php";
 	include "common/common_header.php";
-?>		
-		<!--  header end -->		
-
-		<script type="text/javascript" language="javascript"> //닉네임 중복 버튼 및 글자로 표시
-			$(document).ready(function(){ 
-				$("#checkID").click(function(){ 					
-					var urlLocation="memberCheckId.php"; //member servlet 요청 /php는 서블릿이 없으니 memberCheckId.php을 만들어준다.
-					var id = mem.t_id.value;
-					var params="t_id="+id;  // id값의 변수를 넘긴다.
-					
-					if(id ==""){
-						alert("ID를 입력해 주세요.");
-						mem.t_id.focus();
-						return;
-					}
-
-					if(mem.t_id.value.length < 3){
-						alert("ID는 3글자부터 생성 가능합니다.")
-						mem.t_id.focus();
-						return;
-					}
+	$id = $_SESSION["session_id"];
+	$query ="select id, password, name, ".
+			"mobile, email_1, email_2, ".
+			"address_1, address_2, FORMAT(point , 0) as point ".
+			"from h_member ".
+			"where id = '$id' ";
+	$result = mysqli_query($connect,$query);
+	$row    = mysqli_fetch_array($result);
+	
+?>	
+		<!--  header end -->
 		
-					
-					$.ajax({
-						type : "POST",
-						url : urlLocation, // "Member" 직접 값을 넣어도 된다.
-						data: params, // "t_gubun=idCheck&t_id="+id; 직접 값을 넣어도 된다.
-						dataType : "text",
-						error : function(){
-							alert('통신실패!!');
-						},
-						success : function(data){
-						/*	alert("통신 데이터 값" + data);
-							
-							아래의 아이디 중복검사 버튼의 idcheck 부분 정보 
-						<label for="id"><input type="text" name="t_id" class="id" placeholder="아이디"></label>
-								<input type="button" value="✔ 중복검사" name="idcheck" id="checkID" onClick="" style="cursor:pointer">
-								<span id = "idResult"></span>
-								<input type ="hidden" name="idCheck_yn">
-								<input type ="hidden" name="idCheck_value">
-						*/
-						
-							$("#idResult").html(data);
-							if($.trim(data) =="사용불가"){ //date의 글자는 memberCheckId.php의 msg ="이미 사용중인 ID입니다."와 같아야 적용된다.
-								$("#idResult").css("color","red"); //글자색
-								mem.idCheck_yn.value ="no"; //사용 가능여부
-								mem.idCheck_value.value =""; // 아이디
-							} else {
-								$("#idResult").css("color","green");
-								mem.idCheck_yn.value ="yes";
-								mem.idCheck_value.value =id;
-							}	 
-						}
-					});
-				});
-			});
-		</script>  
-		
+
 		<!-- sub page start -->
 		<div class="notice">
-			<div class="sub-member">
-			<h2><span><i class="fas fa-sign-in-alt"></i> SIGN UP</span></h2>	
-				<p>- 회원가입을 위해, 작성해주세요 -</p>
+		<div class="sub-notice">
+			<h2 class="color"><a href="/info/myinfo_view.php"><i class="fas fa-check"></i>MY INFO</a></h2>	
+			<h2><a href="/info/info_list.php">MEMBER INFO</a></h2>
+			<h2><a href="/info/exit_list.php">EXIT INFO</a></h2>	
 			</div>
 			
 		<!--join start-->
@@ -70,42 +28,33 @@
 			
 			<form class="join" name="mem" >
 				<fieldset>
-					<legend>회원가입 작성</legend>
-					<h2 class="readonly">회원가입</h2>
-					
 						<ul class="id_pw">
 							<li class ="">
 								<i class="fas fa-id-card-alt fa-2x"></i>
-								<label for="id"><input type="text" name="t_id" class="id" placeholder="아이디"></label>
-								<input type="button" value="✔ 중복검사" name="idcheck" id="checkID" onClick="" style="cursor:pointer"> &nbsp&nbsp
-
-								<span id = "idResult"></span>
-								<input type ="hidden" name="idCheck_yn">
-								<input type ="hidden" name="idCheck_value">
-							
+								<label for="id"><input type="text" name="t_id" class="" value="<?=$row["id"]?>" placeholder="아이디" readonly></label>
 							</li>
 							<li>	
 								<i class="fas fa-unlock-alt fa-2x" ></i>
-								<label for="pw"><input type="password" name="t_password_1" placeholder="비밀번호"></label>
+								<label for="pw"><input type="password" name="t_password_1" value="<?=$row["password"]?>" placeholder="비밀번호"></label>
 							</li>	
 							<li>	
 								<i class="fas fa-lock fa-2x"></i>
-								<label for="re_pw"><input type="password" name="t_password_2" placeholder="비밀번호 재확인"></label>
+								<label for="re_pw"><input type="password" name="t_password_2" value="<?=$row["password"]?>" placeholder="비밀번호 재확인"></label>
 							</li>
 						</ul>
 						
 						<ul class="name_phone">
 							<li>						
-								<label for="name"><input type="text" name="t_name" placeholder="이름"></label>
+								<label for="name"><input type="text" name="t_name" value="<?=$row["name"]?>" placeholder="이름"></label>
 							</li>
 							<li>
-								<label for="phone"><input type="text" name="t_mobile" placeholder="연락처 ex)010-3423-2534" class="phone"></label>
+								<label for="phone"><input type="text" name="t_mobile" value="<?=$row["mobile"]?>" placeholder="연락처 ex)010-3423-2534" class="phone"></label>
 								<label for="certifi"></label>
 								<label for="certifi"></label>
 							</li>
 							<li>
-								<input type="text" name="t_email_1" class="email">&#64;
-								<input type="text" name="t_email_2" class="email">
+								<input type="text" name="t_email_1" value="<?=$row["email_1"]?>" class="email">&#64;
+								<input type="text" name="t_email_2" value="<?=$row["email_2"]?>" class="email">
 								<select name="emailtype" onchange="emailChange()" class="email"> <!-- onchange=""는 셀렉트 값이 변할때마다 실행된다. -->
 									<option value="">직접입력</option>
 									<option value="naver.com">naver.com</option>
@@ -114,7 +63,7 @@
 								</select>
 							</li>
 							<li>
-								<input type="text" name="t_address_1" class="address">
+								<input type="text" name="t_address_1" value="<?=$row["address_1"]?>" class="address">
 								<select name="addresstype" onchange="addressChange()" class="email"> <!-- onchange=""는 셀렉트 값이 변할때마다 실행된다. -->
 									<option value="">직접입력</option>
 									<option value="서울 특별시">서울 특별시</option>
@@ -127,7 +76,10 @@
 								</select>
 							</li>
 							<li>	
-								<input type="text" name="t_address_2" class="" placeholder="상세주소">
+								<input type="text" name="t_address_2" value="<?=$row["address_2"]?>" class="" placeholder="상세주소">
+							</li>
+							<li>	
+								<a><i class="fas fa-won-sign"></i><input type="text" name="t_point" value="<?=$row["point"]?>" class="point" placeholder="point" readonly></a>
 							</li>
 						</ul>
 							
@@ -137,17 +89,10 @@
 								<label for="agree"><input type="radio" name="t_info_yn" id="t_info_yn_1" value="y" checked> 1년 정보유지</label>
 								<label for="agree2"><input type="radio" name="t_info_yn" id="t_info_yn_2" value="n"> 탈퇴시까지 정보유지</label>
 							</li>
-							<li>
-							<label for="yak1"><input type="checkbox" name="yak1" id="yak1">이용약관</label>
-								<a href="#">전문보기</a>
-								
-							<label for="yak2"><input type="checkbox" name="yak2" id="yak2">개인정보이용동의</label>
-								<a href="#">전문보기</a>
-							</li>
 						</ul>
 						
 						<ul class="signup">
-						<input type="button" value="✔ SIGN UP" onClick="goSave()">
+						<input type="button" value="✔ UPDATE" onClick="goUpdate()">
 						</ul>
 				</fieldset>
 			</form>
@@ -179,9 +124,8 @@
 				mem.t_address_1.value = a;
 			}
 
-			function goSave() {
+			function goUpdate() {
 				
-				if(checkValue(mem.t_id,"아이디를 입력해주세요.")) return;
 				if(checkValue(mem.t_password_1,"비밀번호를 입력해주세요.")) return;
 				if(checkValue(mem.t_password_2,"비밀번호 확인을 입력해주세요.")) return;
 
@@ -201,7 +145,7 @@
 					mem.t_mobile.focus();
 					return;
 				}
-
+				
 				if(checkValue(mem.t_email_1,"이메일을 입력해주세요.")) return;
 				if(checkValue(mem.t_email_2,"이메일을 입력해주세요.")) return;
 
@@ -250,33 +194,14 @@
 					return;
 					}	
 	*/				
-				if(!(mem.yak1.checked)) {
-					alert("이용약관 동의를 체크해주세요");
-					return;
-				}					
-				
-				if(!(mem.yak2.checked)) {
-					alert("개인정보 동의를 체크해주세요");
-					return;
-				}
-
-				if(mem.idCheck_yn.value=="no"){
-					alert("사용 불가 ID 입니다.");
-					mem.t_id.focus();
-					return;
-				}
-
-				if(mem.t_id.value != mem.idCheck_value.value){
-					alert("아이디 중복여부를 확인해 주세요");
-					mem.t_id.focus();
-				return;
-				}	
+				if(confirm("정보를 수정하시겠습니까?")){
 
 				mem.t_mobile.value = mo2; /* 숫자 외 다른 값이 ex)"-" 들어간걸 지우고 숫자만 남긴걸 다시 mo2에 넣어준다.  */
 
 				mem.method="post";
-				mem.action="db_member_join.php";
-				mem.submit();					
+				mem.action="db_myinfo_update.php";
+				mem.submit();
+				}
 			}			
 			
 		</script>		
