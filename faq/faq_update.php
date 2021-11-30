@@ -22,7 +22,7 @@
 			<h2><a href="/notice/notice_list.php">NOTICE</a></h2>	
 			<h2><a href="/qna/qna_list.php"> QnA</a></h2>
 			<h2 class="color"><a href="faq_list.php"><i class="fas fa-check"></i> FAQ</a></h2>	
-			<h2><a href="/news/news_list.php"> NEWS</a></h2>	
+			<h2><a href="/shop/shop_list.php"> SHOP</a></h2>	
 			</div>	
 			<!-- fqa start-->
 			<div class="faq-box">
@@ -37,8 +37,8 @@
 				<!--button을 누를경우 지정한 이벤트 외 추가로 페이지가 reload되는 경우 버튼 type의 기본값이 submit이기 때문에
 					해결방법으로는 버튼에 type="button"을 부여하던가 form 태그를 div로 대체하면 된다.-->		
 					<li id="drag-<?=$row['no']?>">
-						<button class="accordion" type="button"> <i class="fas fa-arrows-alt-v"></i> ▶ <input type="text" name="t_title" value="<?=$row["title"]?>" class="title" placeholder="제목을 입력해주세요"
-						style ="width: 80%; height: 30px; margin: 0px; border: none; font-family: Nanum Barun Gothic; font-size: 15px;"></button>
+						<button class="accordion" type="button"> <i class="fas fa-arrows-alt-v"></i> ▶ <input type="text" name="t_title" value="<?=htmlspecialchars($row["title"])?>"
+								class="title" placeholder="제목을 입력해주세요" style ="width: 80%; height: 30px; margin: 0px; border: none; font-family: Nanum Barun Gothic; font-size: 15px;"></button>
 						<div class="text2">
 							<span><?=$row["reg_id"]?>/<?=$row["reg_date"]?></span>
 							<p><textarea name="t_content" value="<?=$row["content"]?>" style="margin: 0px; height: 100px; width: 1045px; resize:none;"><?=$row["content"]?></textarea></p>
@@ -60,12 +60,28 @@
 				<input type="hidden" name="t_content">
 			</form>
 			
-			<div class="page-number">
-			<?if($session_level == 'top'){?>	
+			<div class="page-number1">
+	<!--페이징 시 2페이지의 숫자값이 계속 변경됨 오류 해결 실패 <? include "common/pagingDisplay.php"; ?>	 -->
+<!--			<a href="#" class="icon"><i class="fas fa-arrow-circle-left fa-lg"></i></a>
+				<a href="#" class="on">1</a>
+				<a href="#">2</a>
+				<a href="#">3</a>
+				<a href="#">4</a>
+				<a href="#">5</a>
+				<a href="#">6</a>
+				<a href="#">7</a>
+				<a href="#">8</a>
+				<a href="#">9</a>
+				<a href="#" class="more">…</a>
+				<a href="#" class="icon"><i class="fas fa-arrow-circle-right fa-lg"></i></a>
+-->		
+		</div>
+		<div class="page-number">			
+		<?if($session_level == 'top'){?>	
 				<a href="faq_list.php" class="btn-write1">목록</a>
 				<a href="faq_write.php" class="btn-write2">글쓰기</a>
-			<?}?>
-			</div>
+		<?}?>
+		</div>
 			
 		</div>
 		<!-- notice css end -->

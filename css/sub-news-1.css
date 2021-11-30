@@ -40,17 +40,14 @@ html , body {width:100%; height:100%;}
 /* cont css */
 .contnews {width:100%; margin:0 auto; overflow:hidden; padding:70px 20px 150px 20px;}
 .contnews .img {float:left; width:500px; height:500px; background:url(../images/news2.jpg) no-repeat center center; display:inline-block;}
-.contnews h3 {font-size:22px; color:#444444; font-weight:bold; padding-bottom:50px;}
+/* 원본 .contnews h3 {font-size:22px; color:#444444; font-weight:bold; padding-bottom:50px;} */
+.contnews h3 {font-size:22px; color:#444444; font-weight:bold; padding-bottom:20px;}
 .contnews h3 span{font-size:12px; color:#999; letter-spacing:1px; }
 .contnews .txt {width:650px; float:right; font-size:14px; display:inline-block; color:#777; padding:10px 10px; line-height:32px; }
 
 /*쿠팡 버튼*/
-
-.prod-buy-quantity .prod-quantity__form {
-    display: table;
-    width: auto;
-    border: 1px solid #ccc;
-}
+.prod-buy-quantity-and-footer { position: relative; margin-top: 16px;}
+.prod-buy-quantity .prod-quantity__form { display: table; width: auto; border: 1px solid #ccc; }
 
 .prod-buy-quantity .prod-quantity__input {
     vertical-align: top;
@@ -68,78 +65,75 @@ html , body {width:100%; height:100%;}
     padding: 11px 0 9px 0;
 }
 
-.prod-buy-quantity button {
-    background: transparent;
-    position: relative;
-    height: 20px;
-    width: 20px;
-    display: block;
-    border: 0 none;
-    font-size: 0;
-    line-height: 0;
-}
+.prod-buy-quantity button { background: transparent; position: relative; height: 20px; width: 20px; display: block; border: 0 none; font-size: 0; line-height: 0;}
 
 /*up*/
-.prod-buy-quantity button.prod-quantity__plus:after {
-    background-position: -378px -189px;
-}
-
-.prod-buy-quantity button:first-child {
-    border-bottom: 1px solid #ccc;
-}
-
-
-.prod-buy-quantity button:after {
-    display: block;
-    content: '';
-    background-image: url(/images/cupang.png);
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
-
-.prod-buy-quantity button:after {
-    display: block;
-    content: '';
-    background-image: url(/images/cupang.png);
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-}
-.prod-buy-quantity button:after {
-    width: 8px;
-    height: 4px;
-    margin-left: -4px;
-    margin-top: -2px;
-}
+.prod-buy-quantity button.prod-quantity__plus:after { background-position: -378px -189px; }
+.prod-buy-quantity button:first-child { border-bottom: 1px solid #ccc;}
+.prod-buy-quantity button:after { display: block; content: ''; background-image: url(/images/cupang.png); background-repeat: no-repeat; position: absolute; top: 50%; left: 50%;}
+.prod-buy-quantity button:after { width: 8px; height: 4px; margin-left: -4px; margin-top: -2px;}
 
 /*down*/
+.prod-buy-quantity button:after { display: block; content: ''; background-image: url(/images/cupang.png); background-repeat: no-repeat; position: absolute; top: 50%; left: 50%;}
+.prod-buy-quantity button.prod-quantity__minus[disabled]:after { background-position: -390px -197px;}
+.prod-buy-quantity button.prod-quantity__minus:after { background-position: -378px -197px;}
+.prod-buy-quantity button:after { width: 8px; height: 4px; margin-left: -4px; margin-top: -2px;}
 
-.prod-buy-quantity button:after {
+/*장바구니*/
+.prod-buy-footer {
+    *zoom: 1;
+    position: relative;
+    display: inline-block;
+    margin-top: 0;
+}
+
+.prod-buy-footer .prod-cart-btn {
+    margin-right: 7px;
+    color: #346aff;
+}
+.prod-buy-footer button {
     display: block;
-    content: '';
-    background-image: url(/images/cupang.png);
-    background-repeat: no-repeat;
-    position: absolute;
-    top: 50%;
-    left: 50%;
+    float: left;
+    cursor: pointer;
+    position: relative;
+    line-height: 40px;
+    width: 191px;
+    height: 42px;
+    background: transparent;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid #346aff;
+}
+/*상품 상세 정보*/
+.price-box {
+    position: relative;
+    float: left;
+    width: 479px;
+    font-size: 12px;
+    padding-left: 30px;
 }
 
-.prod-buy-quantity button.prod-quantity__minus[disabled]:after {
-    background-position: -390px -197px;
+.price-box .maybedaybig{
+    font-size: 16px;
+    color: #1c920df1 !important;
+   
 }
 
-.prod-buy-quantity button.prod-quantity__minus:after {
-    background-position: -378px -197px;
+.price-box .maybeday{
+    font-size: 14px;
+    color: #1c920df1 !important;
+   
 }
 
-.prod-buy-quantity button:after {
-    width: 8px;
-    height: 4px;
-    margin-left: -4px;
-    margin-top: -2px;
+.price-box .txt {
+    width: 650px;
+    float: none;
+    font-size: 16px;
+    display: inline-block;
+    color: #777;
+    padding: 0px 0px;
+    line-height: 32px;
 }
 
  /*page-number css*/

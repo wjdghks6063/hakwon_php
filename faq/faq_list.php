@@ -33,7 +33,7 @@
 			<h2><a href="/notice/notice_list.php">NOTICE</a></h2>	
 			<h2><a href="/qna/qna_list.php"> QnA</a></h2>
 			<h2 class="color"><a href="faq_list.php"><i class="fas fa-check"></i> FAQ</a></h2>	
-			<h2><a href="/news/news_list.php"> NEWS</a></h2>	
+			<h2><a href="/shop/shop_list.php"> SHOP</a></h2>	
 			</div>
 			
 			<!-- fqa start-->

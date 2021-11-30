@@ -50,7 +50,7 @@
 							
 							<tr>
 								<th><label for="title">제목</label></th>
-								<td><input type="text" name="t_title" value="<?=$row["title"]?>" id="title" class="title" placeholder="제목을 입력해주세요"></td>
+								<td><input type="text" name="t_title" value="<?=htmlspecialchars($row["title"])?>" id="title" class="title" placeholder="제목을 입력해주세요"></td>
 							</tr>
 							
 							<tr>

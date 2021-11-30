@@ -36,7 +36,10 @@
 							
 							<tr>
 								<th><label for="title">제목</label></th>
-								<td><input type="text" name="q_title" value="<?=$row["q_title"]?>" class="title" placeholder="제목을 입력해주세요"></td>
+								<!--<?=htmlspecialchars($row["q_title"])?> 는 ""가 들어가면 문자가 짤리는걸 막아준다. 예) $row["q_title"] 의 문장을 풀면 "안녕하세요."라고 했을 때
+								""안의 문자만 표시해준다. 문장안에 기호로 " "안녕"하세요 "라고 하면 " "에서 문장이 끝나기 떄문에 나머지가 출력되지 않기 때문에 htmlspecialchars로 처리해준다.
+								htmlspecialchars는 input type="text"에서만 써주면 된다. textarea는 자동으로 인식하기 때문에 써주지 않아도 된다.-->
+								<td><input type="text" name="q_title" value="<?=htmlspecialchars($row["q_title"])?>" class="title" placeholder="제목을 입력해주세요"></td>
 							</tr>
 							
 							<tr>

@@ -1,4 +1,5 @@
 <?
+	
 //	header("Cache-Control: no cache"); //뒤로 가기 누를시 페이지 양식 제출뜨면서 에러 나기 때문에 뒤로 가기 버튼 오류 방지
 //	session_cache_limiter("private_no_expire");
 

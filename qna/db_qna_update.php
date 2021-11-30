@@ -3,8 +3,8 @@
     include "common/dbconnect.php";
 
         $no              = $_POST["t_no"];
-        $q_title         = $_POST["q_title"];
-        $q_content       = $_POST["q_content"];
+        $q_title         = addslashes($_POST["q_title"]); //addslashes();는  '' , "" 같은 특수문자도 db에 넣을 수 있게 해준다.
+        $q_content       = addslashes($_POST["q_content"]);
         $secret          = $_POST["secret"];
 
         if(!$secret) {

@@ -3,7 +3,7 @@
     include "common/dbconnect.php";
 
         $no              = $_POST["t_no"];
-        $a_content       = $_POST["a_content"];
+        $a_content       = addslashes($_POST["a_content"]); //addslashes();는  '' , "" 같은 특수문자도 db에 넣을 수 있게 해준다.
 
         $a_reg_id        = $_SESSION["session_id"];
         $a_reg_date_time = date("y-m-d H:i:s",time());

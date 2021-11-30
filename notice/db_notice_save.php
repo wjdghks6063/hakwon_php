@@ -31,8 +31,8 @@
     echo "====full_attach_info : ".$full_attach_info."<br>";
     echo "====attach_result : ".$attach_result."<br>";
 */
-    $title = $_POST["t_title"];
-    $content = $_POST["t_content"];
+    $title = addslashes($_POST["t_title"]); //addslashes();는  '' , "" 같은 특수문자도 db에 넣을 수 있게 해준다.
+    $content = addslashes($_POST["t_content"]);
     $reg_id = $_SESSION["session_id"];
     $reg_date_time = date("y-m-d h:i:s", time());
 

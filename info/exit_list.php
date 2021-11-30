@@ -73,10 +73,10 @@
 		<!-- sub page start -->
 		<div class="notice">
 			<div class="sub-notice">
-			<h2><a href="/info/myinfo_view.php">MY INFO</a></h2>	
+			<h2><a href="/info/myinfo_view.php">내 정보</a></h2>	
 		<?	if($session_level == 'top') { ?>
-			<h2><a href="/info/info_list.php">MEMBER INFO</a></h2>
-			<h2 class="color"><a href="/info/exit_list.php"><i class="fas fa-check"></i>EXIT INFO</a></h2>	
+			<h2><a href="/info/info_list.php">회원 정보</a></h2>
+			<h2 class="color"><a href="/info/exit_list.php"><i class="fas fa-check"></i>탈퇴 정보</a></h2>	
 		<?	} ?>
 			</div>
 			

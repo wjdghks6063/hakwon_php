@@ -53,7 +53,7 @@
 			<h2><a href="/notice/notice_list.php">NOTICE</a></h2>	
 			<h2 class="color"><a href="qna_list.php"><i class="fas fa-check"></i> QnA</a></h2>
 			<h2><a href="/faq/faq_list.php"> FAQ</a></h2>	
-			<h2><a href="/news/news_list.php"> NEWS</a></h2>	
+			<h2><a href="/shop/shop_list.php"> SHOP</a></h2>	
 			</div>
 			
 			<!-- table start-->
