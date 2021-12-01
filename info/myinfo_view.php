@@ -13,7 +13,9 @@
 	
 ?>	
 		<!--  header end -->
-		
+<form name="exit">
+	<input type="hidden" name="t_id" value="<?=$id?>" ">
+</form>		
 
 		<!-- sub page start -->
 		<div class="notice">
@@ -97,7 +99,8 @@
 						</ul>
 						
 						<ul class="signup">
-						<input type="button" value="✔ UPDATE" onClick="goUpdate()">
+						<input type="button" value="회원탈퇴" style="margin-bottom:10px; background-color: #ED0000;" onClick="goExit()">
+						<input type="button" value="정보수정" onClick="goUpdate()">
 						</ul>
 				</fieldset>
 			</form>
@@ -127,6 +130,14 @@
 			function addressChange(){
 				var a = mem.addresstype.value; /*오른쪽이 왼쪽에 대입됨 */
 				mem.t_address_1.value = a;
+			}
+
+			function goExit(){
+				if(confirm("정말 탈퇴하시겠습니까?")){	
+				exit.method="post";
+				exit.action="/member/db_member_exit.php";
+				exit.submit();
+				}
 			}
 
 			function goUpdate() {

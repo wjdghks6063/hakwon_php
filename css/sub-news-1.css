@@ -41,12 +41,12 @@ html , body {width:100%; height:100%;}
 .contnews {width:100%; margin:0 auto; overflow:hidden; padding:70px 20px 150px 20px;}
 .contnews .img {float:left; width:500px; height:500px; background:url(../images/news2.jpg) no-repeat center center; display:inline-block;}
 /* 원본 .contnews h3 {font-size:22px; color:#444444; font-weight:bold; padding-bottom:50px;} */
-.contnews h3 {font-size:22px; color:#444444; font-weight:bold; padding-bottom:20px;}
+.contnews h3 {font-size:22px; color:#444444; font-weight:bold; padding-bottom:0px;}
 .contnews h3 span{font-size:12px; color:#999; letter-spacing:1px; }
 .contnews .txt {width:650px; float:right; font-size:14px; display:inline-block; color:#777; padding:10px 10px; line-height:32px; }
 
 /*쿠팡 버튼*/
-.prod-buy-quantity-and-footer { position: relative; margin-top: 16px;}
+.prod-buy-quantity-and-footer { position: relative; margin-top: 50px;}
 .prod-buy-quantity .prod-quantity__form { display: table; width: auto; border: 1px solid #ccc; }
 
 .prod-buy-quantity .prod-quantity__input {
@@ -64,6 +64,7 @@ html , body {width:100%; height:100%;}
     line-height: 25px;
     padding: 11px 0 9px 0;
 }
+.prod-buy-quantity {width:100px; float:left;}
 
 .prod-buy-quantity button { background: transparent; position: relative; height: 20px; width: 20px; display: block; border: 0 none; font-size: 0; line-height: 0;}
 
@@ -80,24 +81,18 @@ html , body {width:100%; height:100%;}
 .prod-buy-quantity button:after { width: 8px; height: 4px; margin-left: -4px; margin-top: -2px;}
 
 /*장바구니*/
-.prod-buy-footer {
-    *zoom: 1;
-    position: relative;
-    display: inline-block;
-    margin-top: 0;
-}
+.prod-buy-footer { *zoom: 1; position: relative; display: inline-block; margin-top: 0;}
 
-.prod-buy-footer .prod-cart-btn {
-    margin-right: 7px;
-    color: #346aff;
-}
+.prod-buy-footer .prod-cart-btn { margin-right: 7px; color: #346aff;}
+
+/*버튼 크기*/
 .prod-buy-footer button {
     display: block;
     float: left;
     cursor: pointer;
     position: relative;
     line-height: 40px;
-    width: 191px;
+    width: 171px;
     height: 42px;
     background: transparent;
     text-align: center;
@@ -106,35 +101,14 @@ html , body {width:100%; height:100%;}
     border: 1px solid #346aff;
 }
 /*상품 상세 정보*/
-.price-box {
-    position: relative;
-    float: left;
-    width: 479px;
-    font-size: 12px;
-    padding-left: 30px;
-}
-
-.price-box .maybedaybig{
-    font-size: 16px;
-    color: #1c920df1 !important;
-   
-}
-
-.price-box .maybeday{
-    font-size: 14px;
-    color: #1c920df1 !important;
-   
-}
-
-.price-box .txt {
-    width: 650px;
-    float: none;
-    font-size: 16px;
-    display: inline-block;
-    color: #777;
-    padding: 0px 0px;
-    line-height: 32px;
-}
+.price-box { position: relative; float: left; width: 479px; font-size: 12px; padding-left: 30px; }
+.price-box .maybedaybig{ font-size: 16px; color: #1c920df1 !important; }
+.price-box .maybeday{ font-size: 14px; color: #1c920df1 !important; }
+.price-box .txt { width: 650px; float: none; font-size: 16px; display: inline-block; color: #777; padding: 0px 0px; line-height: 25px; }
+.price-box .maybeday{padding-bottom: 10px;}
+.price-box .stuff_number{padding-top:5px; padding-bottom: 35px; font-size: 14px;}
+/*물건 가격*/
+input#total_price { border: none; font-size: 30px; width: 150px;}
 
  /*page-number css*/
 .page-number {width:1200px; margin:0 auto; background:#fff; text-align:center; line-height:10px; font-size:14px; padding-bottom:140px; }

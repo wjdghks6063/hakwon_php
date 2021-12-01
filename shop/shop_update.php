@@ -51,12 +51,12 @@
 							</colgroup>
 							
 							<tr>
-								<th><label for="title">제목</label></th>
-								<td><input type="text" name="t_title" value="<?=htmlspecialchars($row["title"])?>" class="title" placeholder="제목을 입력해주세요"></td>
+								<th><label for="title">상품 명</label></th>
+								<td><input type="text" name="t_title" value="<?=htmlspecialchars($row["title"])?>" class="title" placeholder="상품 명을 입력해주세요"></td>
 							</tr>
 							
 							<tr>
-								<th><label for="cont">내용</label></th>
+								<th><label for="cont">상세 정보</label></th>
 								<td><textarea type="cont" name="t_content" value="<?=$row["content"]?>" class="cont"><?=$row["content"]?></textarea>
 							</tr>
 						<style>

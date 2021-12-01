@@ -47,7 +47,7 @@
 		if(confirm("정말 탈퇴시키겠습니까?")){
 		info.t_id.value=id;
 		info.method="post";
-		info.action="/member/db_member_exit.php";
+		info.action="/member/db_top_exit.php";
 		info.submit();
 		}
 	}

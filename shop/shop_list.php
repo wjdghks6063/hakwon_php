@@ -13,7 +13,7 @@
 	$t_page =$_POST['t_page']; // view에 갔다가 목록이나 뒤로 가기를 했을 때 현재 페이징 넘버로 가질 수 있게 해준다.
 /**********************************************************************/
 
-	$query ="select no, title, attach from h_shop order by no desc ";
+	$query ="select no, title, attach,  FORMAT(price , 0) as price from h_shop order by no desc ";
 	$result = mysqli_query($connect,$query);
 										
 	$count = mysqli_num_rows($result); 
@@ -65,6 +65,7 @@
 						<a href="javascript:goView('<?=$row["no"]?>')">
 							<span class="img"><img src="/file_room/shop/<?=$row["attach"]?>" alt="shop1"></span>
 							<p><?=$row["title"]?></p>
+							<p><?=$row["price"]?> 원</p>
 		
 							<span class="size-up"></span>
 						</a>

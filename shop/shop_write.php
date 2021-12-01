@@ -34,12 +34,12 @@
 							</colgroup>
 							
 							<tr>
-								<th><label for="title">제목</label></th>
+								<th><label for="title">상품 명</label></th>
 								<td><input type="text" name="t_title" id="title" class="title" placeholder="제목을 입력해주세요"></td>
 							</tr>
 							
 							<tr>
-								<th><label for="cont">내용</label></th>
+								<th><label for="cont">상세 정보</label></th>
 								<td><textarea type="cont" name="t_content" id="cont" class="cont" placeholder="내용을 입력해주세요"></textarea>
 							</tr>
 							
