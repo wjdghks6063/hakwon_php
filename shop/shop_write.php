@@ -42,6 +42,21 @@
 								<th><label for="cont">상세 정보</label></th>
 								<td><textarea type="cont" name="t_content" id="cont" class="cont" placeholder="내용을 입력해주세요"></textarea>
 							</tr>
+
+							<tr>
+								<th><label for="title">물품 수량</label></th>
+								<td><input type="text" name="t_stuff_number" id="number" class="number" placeholder="수량을 입력해주세요."
+									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"></td>
+							</tr>
+							<tr>
+								<th><label for="title">물품 가격</label></th>
+								<td><input type="text" name="t_price" id="number" class="number" placeholder="수량을 입력해주세요."
+									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"></td>
+							</tr>
+							<tr>
+								<th><label for="title">회사 명</label></th>
+								<td><input type="text" name="t_shop_name" id="number" class="number" placeholder="회사 상호명을 입력해주세요."></td>
+							</tr>
 							
 							<tr>
 								<th><label for="file">파일 첨부</label></th>

@@ -35,7 +35,8 @@ body        {font-family:Nanum Barun Gothic; background:#6dacb8;}
 .notice-write {width:1200px; padding:20px 20px 130px 20px; margin:0 auto;  }
 .table {border-top:2px solid #e1e1e1;  border-bottom:2px solid #e1e1e1; width:97%; margin:0 auto; background:#EFF8FB;}
 .table .title {width:95%; height:40px; padding:10px; margin:10px; border:none; font-family:Nanum Barun Gothic; font-size:15px;}
-.table .cont {width:95%; height:200px; padding:10px; margin:10px; border:none; font-family:Nanum Barun Gothic; font-size:15px;}
+.table .cont {width:95%; height:200px; margin:10px; border:none; font-family:Nanum Barun Gothic; font-size:15px;}
+.table .number {width:95%; height:20px; padding:10px; margin:10px; border:none; font-family:Nanum Barun Gothic; font-size:15px;}
 .table th {background:#EFf1FB; border:1px solid #e1e1e1; } 
 .table td {border:1px dashed #e1e1e1; }
 

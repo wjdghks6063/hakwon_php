@@ -55,15 +55,15 @@
 							<li><a href="https://www.youtube.com/channel/UCkoJ_TsGn-WqDVWEzGnhfcA"target="_blank"><i class="fab fa-youtube"> </i></a></li>
 
 							<?	if($session_level == 'top' && $session_name){?>
-								<li><a href="/info/info_list.php"><i class="fas fa-search"> </i></a></li>
+								<li><a href="/info/info_list.php"><i class="fas fa-search" title="회원 정보"> </i></a></li> <!-- title 태그는 마우스 대고 있으면 텍스트창이 표시-->
 							<?	}else if($session_name){?>
-								<li><a href="/info/myinfo_view.php"><i class="fas fa-search"> </i></a></li>
+								<li><a href="/info/myinfo_view.php"><i class="fas fa-search" title="내 정보"> </i></a></li>
 							<?	} ?>
 							<?	if($session_name){?>
-								<li><a href="/member/logout.php">
+								<li><a href="/member/logout.php" title="로그아웃">
 									<i class="fas fa-sign-out-alt"></i></a></li>
 							<?	} else {?>
-								<li><a href="/member/login.php"><i class="fas fa-user"></i></a></li>
+								<li><a href="/member/login.php" title="로그인"><i class="fas fa-user"></i></a></li>
 							<?	}?>	
 						
 						</ul>

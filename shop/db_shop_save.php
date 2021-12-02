@@ -19,10 +19,13 @@
 //	system(" rm -r $dir/*.png");
 
 
-    
+    // $title = $_POST["t_title"]; post 타입으로 받는다.
     $title = addslashes($_POST["t_title"]); //addslashes();는  '' , "" 같은 특수문자도 db에 넣을 수 있게 해준다.
     $content = addslashes($_POST["t_content"]);
     $attach_name = $_FILES['t_attach']['name'];
+    $stuff_number = $_POST["t_stuff_number"];
+    $price = $_POST["t_price"];
+    $title = $_POST["t_title"];
     $reg_id = $_SESSION["session_id"];
     $reg_date_time = date("y-m-d h:i:s", time());
 

@@ -98,7 +98,7 @@ html , body {width:100%; height:100%;}
     text-align: center;
     font-weight: bold;
     font-size: 16px;
-    border: 1px solid #346aff;
+    border: 1px solid black;
 }
 /*상품 상세 정보*/
 .price-box { position: relative; float: left; width: 479px; font-size: 12px; padding-left: 30px; }
@@ -107,8 +107,15 @@ html , body {width:100%; height:100%;}
 .price-box .txt { width: 650px; float: none; font-size: 16px; display: inline-block; color: #777; padding: 0px 0px; line-height: 25px; }
 .price-box .maybeday{padding-bottom: 10px;}
 .price-box .stuff_number{padding-top:5px; padding-bottom: 35px; font-size: 14px;}
+/*물건 가격 span*/
+span#span_total_price { font-size: 24px; color: black; font-family: apple sd gothic neo,"맑은 고딕",malgun gothic,"나눔고딕",nanumgothic,"돋움",dotum,sans-serif;}
+span#won { font-size: 16px; color: black;  margin-left: 8px; font-family: apple sd gothic neo,"맑은 고딕",malgun gothic,"나눔고딕",nanumgothic,"돋움",dotum,sans-serif;}
+
 /*물건 가격*/
-input#total_price { border: none; font-size: 30px; width: 150px;}
+input#total_price { border: none; font-size: 30px; width: 200px;}
+
+
+        
 
  /*page-number css*/
 .page-number {width:1200px; margin:0 auto; background:#fff; text-align:center; line-height:10px; font-size:14px; padding-bottom:140px; }

@@ -41,46 +41,165 @@
 		goBackPage.action ="shop_list.php";
 		goBackPage.submit();
 	}
+	function goBasket(){
+		alert("상품이 장바구니에 담겼습니다.");
+		goBackPage.method ="post";
+		goBackPage.action ="shop_list.php";
+	//	goBackPage.submit();
+	}
+	function goBuy(){
+		alert("aaa");
+		goBackPage.method ="post";
+		goBackPage.action ="shop_list.php";
+	//	goBackPage.submit();
+	}
 
-	/*물건 수량 카운트 및 카운트에 따른 가격 변환 */
 
-	function count(type)  { // +,- 여부
-		// 결과를 표시할 element
+
+
+	// 아래 수량 카운트로 교체함
+
+	/*물건 수량 카운트 및 카운트에 따른 가격 변환 */ 
+
+	// function count(type)  { // +,- 여부
+	// 	// 결과를 표시할 element
+	// 	var count = document.getElementById('price_num').value; //input 상자의 값을 count에 넣는다.
+	// 	//porm이 있을 경우 formName.price_num.value 로 가져온다. ex) mem.point.value;
+	// 	//porm이 없을 경우 document.getElementById('price_num').value 이런식으로 가져올수 있다. input 상자의 id가 price_num
+	// 	//alert(count);
+		
+	// 	// 더하기/빼기
+	// 	if(type === 'plus') {
+	// 		count = Number(count) + 1; //var는 문자로 인식하기 때문에 더하기 위해서 Number로 int로 바꿔준다.
+	// 		if(count > 50){ count = 50;
+	// 			alert("수량은 50개 까지만 구입가능합니다.")
+	// 		}	
+	// 	//alert(count);
+	// 	}else if(type === 'minus')  {	
+	// 		count = Number(count) - 1;
+	// 		if(count < 1) count = 1; // 1 이하로 내려갈 경우 1로 바꿔준다.
+	// 	}
+
+	// 	/*물건 수량에 따른 제품 총합값 변환 */
+	// 	var total_price = document.getElementById('total_price_ori').value; //콤마 들어간 숫자값 // 원래 상품 가격 hidden으로 숨겨놓음
+	// 	/* total_price_ori 를 사용하지 않으면 500*2 해서 1000이 되었다면 total_price 값이 1000 이 되어 1000*3 이 되어버리기 때문에 total_price_ori로 total_price의 값을
+	// 	500 원으로 초기화 시키고 *(숫자)를 해준다.*/
+		
+	// 	total_price = total_price.replace(",", ""); //콤마가 있으면 계산이 안되기 때문에 콤마 있는 total_price 의 콤마 제거해서 다시 total_price 에 넣는다.
+
+	// 	total_price = Number(total_price)*Number(count); //물건 금액에 카운트 숫자값을 곱해준다.
+		
+	// 	var total_price = total_price.toLocaleString(); // 콤마 제거 숫자값에 다시 ,를 해준다.
+
+	// 	document.getElementById('total_price').value = total_price; //더해진 값을 다시 input 상자에 넣어준다.
+
+	// 	/*물건 수량 */
+	// 	document.getElementById('price_num').value = count; //더해진 값을 다시 input 상자에 넣어준다.
+//	}
+		
+</script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {    
+
+	$('#plus').click(function(){ //plus 버튼을 눌르면 작동 된다.
+
 		var count = document.getElementById('price_num').value; //input 상자의 값을 count에 넣는다.
 		//porm이 있을 경우 formName.price_num.value 로 가져온다. ex) mem.point.value;
 		//porm이 없을 경우 document.getElementById('price_num').value 이런식으로 가져올수 있다. input 상자의 id가 price_num
 		//alert(count);
 		
 		// 더하기/빼기
-		if(type === 'plus') {
 			count = Number(count) + 1; //var는 문자로 인식하기 때문에 더하기 위해서 Number로 int로 바꿔준다.
-			if(count > 50){ count = 50;
-				alert("수량은 50개 까지만 구입가능합니다.")
+			if(count > <?=$row["stuff_number"]?>){ 
+				alert("최대 수량 이상으로는 구매하실 수 없습니다.")
+			}else{
+				var total_price = document.getElementById('total_price_ori').value; //total_price 의 값은 물건 1개 가격
+					//alert(count);
+					document.getElementById('price_num').value = count; //더해진 값을 다시 input 상자에 넣어준다.
+
+					total_price = total_price.replace(",", ""); //콤마가 있으면 계산이 안되기 때문에 콤마 있는 total_price 의 콤마 제거해서 다시 total_price 에 넣는다.
+
+					total_price = Number(total_price)*Number(count); //물건 금액에 카운트 숫자값을 곱해준다.
+
+					var total_price = total_price.toLocaleString(); // 콤마 제거 숫자값에 다시 ,를 해준다.
+
+					document.getElementById('total_price').value = total_price; //더해진 값을 다시 input 상자에 넣어준다.
+
+					$("#span_total_price").text(total_price); //span 안에 input 의 값을 넣어준다.
 			}	
 		//alert(count);
-		}else if(type === 'minus')  {	
-			count = Number(count) - 1;
-			if(count < 1) count = 1; // 1 이하로 내려갈 경우 1로 바꿔준다.
-		}
-
-		/*물건 수량에 따른 제품 총합값 변환 */
-		var total_price = document.getElementById('total_price_ori').value; //콤마 들어간 숫자값 // 원래 상품 가격 hidden으로 숨겨놓음
-		/* total_price_ori 를 사용하지 않으면 500*2 해서 1000이 되었다면 total_price 값이 1000 이 되어 1000*3 이 되어버리기 때문에 total_price_ori로 total_price의 값을
-		500 원으로 초기화 시키고 *(숫자)를 해준다.*/
 		
-		total_price = total_price.replace(",", ""); //콤마가 있으면 계산이 안되기 때문에 콤마 있는 total_price 의 콤마 제거해서 다시 total_price 에 넣는다.
+	});
 
-		total_price = Number(total_price)*Number(count); //물건 금액에 카운트 숫자값을 곱해준다.
+	$('#minus').click(function(){ // 마이너스 버튼을 누르면 작동한다.
+
+		var count = document.getElementById('price_num').value; //input 상자의 값을 count에 넣는다.
+		//porm이 있을 경우 formName.price_num.value 로 가져온다. ex) mem.point.value;
+		//porm이 없을 경우 document.getElementById('price_num').value 이런식으로 가져올수 있다. input 상자의 id가 price_num
+		//alert(count);
 		
-		var total_price = total_price.toLocaleString(); // 콤마 제거 숫자값에 다시 ,를 해준다.
+			// 더하기/빼기
+			count = Number(count) - 1; //var는 문자로 인식하기 때문에 더하기 위해서 Number로 int로 바꿔준다.
+				if(count < 1){ count = 1;
+		
+				}else{
+					var total_price = document.getElementById('total_price_ori').value; //total_price는 물건 1개 가격
+						//alert(count);
+						document.getElementById('price_num').value = count; //더해진 값을 다시 input 상자에 넣어준다.
 
-		document.getElementById('total_price').value = total_price; //더해진 값을 다시 input 상자에 넣어준다.
+						total_price = total_price.replace(",", ""); //콤마가 있으면 계산이 안되기 때문에 콤마 있는 total_price 의 콤마 제거해서 다시 total_price 에 넣는다.
 
-		/*물건 수량 */
-		document.getElementById('price_num').value = count; //더해진 값을 다시 input 상자에 넣어준다.
+						total_price = Number(total_price)*Number(count); //물건 금액에 카운트 숫자값을 곱해준다.
+
+						var total_price = total_price.toLocaleString(); // 콤마 제거 숫자값에 다시 ,를 해준다.
+
+						document.getElementById('total_price').value = total_price; //더해진 값을 다시 input 상자에 넣어준다.
+
+						$("#span_total_price").text(total_price); //span 안에 input 의 값을 넣어준다.
+				}	
+			//alert(count);
+	});
+
+	$("#price_num").keyup(function(){ //키보드 키를 누를 때 작동한다. //물건 수량
+		
+		var count = document.getElementById('price_num').value; //input 상자의 값을 count에 넣는다. count에 물건 수량 value 값을 넣는다.
+		var total_price = document.getElementById('total_price_ori').value; // 물건 1개 값. 
+		
+			if(count == "" || count == 0){ count = 1; //물건 수량 칸의 값이 빈칸이거나 0인 경우 수량을 1로 바꾼다.
+				document.getElementById('price_num').value = count; //바꾼 수량 값 1을 수량 입력칸에 넣어준다.
+				
+				document.getElementById('total_price').value = total_price; //물건 가격란에 var total_price 값인 1개 가격을 넣어준다.
+
+				$("#span_total_price").text(total_price); //span 안에 input 의 값을 넣어준다.
+			}else{
+
+			//	var total_price = document.getElementById('total_price_ori').value; 위쪽에 써놧으므로 상관 없어짐
+						//alert(count);
+						document.getElementById('price_num').value = count; //더해진 값을 다시 input 상자에 넣어준다.
+						total_price = total_price.replace(",", ""); //콤마가 있으면 계산이 안되기 때문에 콤마 있는 total_price 의 콤마 제거해서 다시 total_price 에 넣는다.
+						total_price = Number(total_price)*Number(count); //물건 금액에 카운트 숫자값을 곱해준다.
+
+						var total_price = total_price.toLocaleString(); // 콤마 제거 숫자값에 다시 ,를 해준다.
+						document.getElementById('total_price').value = total_price; //더해진 값을 다시 input 상자에 넣어준다.
+						$("#span_total_price").text(total_price); //span 안에 input 의 값을 넣어준다.
+				}	
+	});
+
+});
+
+function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 올때마다 이 funtion을 실행한다.
+	var co = obj.value; //obj = input 상자의 value
+	var maxco = document.getElementById('maxcount').value; //<input type="hidden" id="maxcount" value="<?=$row["stuff_number"]?>">으로 최대수량 value를 가져온다.
+	if(Number(co) > Number(maxco)){ //구매 수량이 최대 물건 수량을 넘기면
+		document.getElementById('price_num').value = maxco; //물건 수량의 value는 최대 수량이 된다.
+		alert("최대 수량 이상으로는 구매하실 수 없습니다.")
 	}
-
+	//alert(maxco);
+}
 </script>
+
 		<!--  header end -->
 <form name="shop">
 	<input type="hidden" name="t_no" value="<?=$no?>">
@@ -113,31 +232,20 @@
 					<div class="maybeday">	
 						<span class="maybedaybig"> 배송 예정일자 :</span> <span class="maybeday"> <?=$month?>-<?=$day?>-<?=$yoil?> 도착 예정</span>
 					</div>
-					<span class="total_price">	
-					<h3><input type="text" name="total_price" id="total_price" value="<?=$row["price"]?>" readonly><span>원</span></h3>
+					<span class="total_price">
+					<!--input type의 값을 span으로 불러와 사용하기 떄문에 inputtype을 만들어 숨겨둔다. -->		
+						<input type="hidden" name="total_price" id="total_price" value="<?=$row["price"]?>">
 					<!--상품 가격에 곱하기를 하면 곱해진 값에 곱하기를 하기때문에 원래 상품가격을 hidden 으로 만들어둔다.-->
 					<input type="hidden" id="total_price_ori" value="<?=$row["price"]?>">
 					</span>
 
-					<!-- -->
 					<div class="prod-sale-price  wow-coupon-discount ">
-						<span class="total-price" name="total_price" id="total_price" >
-							<?=$row["price"]?><span class="priceunit">원
-						</span>
+						<h3><span class="total-price" name="total_price" id="span_total_price" ><?=$row["price"]?>	
+						</span><span class="won" id="won">원</span></h3>
 					</div>
-					<script type="text/javascript">
-						$(document).ready(function() {    
-
-						$("#total_cost").text($("#total_cost_value").val()); 
-
-						});
-
-					</script>
-
-						$("#total_price").text(<?=$row["price"]?>); 
-
+				
 					<div class="stuff_number"><span> 현재 수량: <?=$row["stuff_number"]?> 개</span></div>
-					
+					<input type="hidden" id="maxcount" value="<?=$row["stuff_number"]?>">
 					
 				<p class="txt"><?=$t_content?></p>
 				
@@ -145,26 +253,26 @@
 					<div class="prod-buy-quantity-and-footer">
 						<div class="prod-buy-quantity">
 							<div class="prod-buy__quantity" style="width: 50px;" >
-								<div class="prod-quantity__form">
-									<input type="text" name="price" id="price_num" value="1" class="prod-quantity__input" maxlength="50" autocomplete="off"
+								<div class="prod-quantity__form"> <!--checkcount(this) this는 input 상자를 말한다. -->
+									<input type="text" onkeyup="checkcount(this)" name="price" id="price_num" value="1" class="prod-quantity__input" maxlength="50" autocomplete="off"
 										oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')">
 								<div style="display:table-cell;vertical-align:top;">
-									<button class="prod-quantity__plus" type="button" onclick='count("plus")' >수량더하기</button>
-									<button class="prod-quantity__minus" type="button" onclick='count("minus")' >수량빼기</button>
+									<button class="prod-quantity__plus" id="plus" type="button" onclick='count("plus")' >수량더하기</button>
+									<button class="prod-quantity__minus" id="minus" type="button" onclick='count("minus")' >수량빼기</button>
 								</div>
+
 								</div>
 
 							</div>
-							<!-- 장바구니 구매 버튼 -->
 						</div>
-
+					<!-- 장바구니, 구매 버튼 -->
 					<div class="prod-buy-footer ">
 						<div class="prod-order-data" style="display:none;"></div>
 						<div class="prod-onetime-order">
-							<button class="prod-cart-btn"">
-								장바구니 담기
+							<button class="prod-cart-btn" onclick="javascript:goBasket()">
+								<i class="fas fa-cart-arrow-down"></i> 장바구니 담기
 							</button>
-							<button class="prod-buy-btn">
+							<button class="prod-buy-btn" onclick="javascript:goBuy()">
 								<span class="prod-buy-btn__txt">바로구매</span>
 							</button>
 						</div>

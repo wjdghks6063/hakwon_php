@@ -22,8 +22,8 @@
 			<div class="sub-notice">
 				<h2 class="color"><a href="/info/myinfo_view.php"><i class="fas fa-check"></i>내 정보</a></h2>
 				<h2><a href="/info/info_list.php">코인 충전</a></h2>
-				<h2><a href="/info/info_list.php">코인사용 내역</a></h2>
-				<h2><a href="/info/info_list.php">구매 내역조회</a></h2>
+				<h2><a href="/info/info_list.php">코인 내역</a></h2>
+				<h2><a href="/info/info_list.php">구매 내역</a></h2>
 				<?	if($session_level == 'top') { ?>
 				<h2><a href="/info/info_list.php">회원 정보</a></h2>
 				<h2><a href="/info/exit_list.php">탈퇴 정보</a></h2>	
