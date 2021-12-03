@@ -60,8 +60,8 @@
 								<li><a href="/info/myinfo_view.php"><i class="fas fa-search" title="내 정보"> </i></a></li>
 							<?	} ?>
 							<?	if($session_name){?>
-								<li><a href="/member/logout.php" title="로그아웃">
-									<i class="fas fa-sign-out-alt"></i></a></li>
+								<li><a href="/basket/basket_list.php"><i class="fas fa-cart-arrow-down" title="장바구니"> </i></a></li>
+								<li><a href="/member/logout.php" title="로그아웃"><i class="fas fa-sign-out-alt"></i></a></li>
 							<?	} else {?>
 								<li><a href="/member/login.php" title="로그인"><i class="fas fa-user"></i></a></li>
 							<?	}?>	

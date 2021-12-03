@@ -49,9 +49,10 @@
 								<li><a href="/info/myinfo_view.php"><i class="fas fa-search"> </i></a></li>
 							<?	} ?>
 							<? if($_session_name) {?>
-							<li><a href="/member/logout.php"><i class="fas fa-sign-out-alt"></i></a></li>
+								<li><a href="/basket/basket_list.php"><i class="fas fa-cart-arrow-down" title="장바구니"> </i></a></li>	
+								<li><a href="/member/logout.php"><i class="fas fa-sign-out-alt"></i></a></li>
 							<? } else {?>	
-							<li><a href="/member/login.php"><i class="fas fa-user"></i></a></li>
+								<li><a href="/member/login.php"><i class="fas fa-user"></i></a></li>
 							<? } ?>
 						</ul>
 					</div>

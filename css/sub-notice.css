@@ -69,7 +69,6 @@ background:#eeeeee; padding:70px 25px 55px 25px; }
 .toggle input:checked + label::before { background-color: #FF6C6C; /* 켠 상태 배경색 */}
 .toggle input:checked + label::after { /* 켠 상태 스위치 위치 */ left: 24px;}
 
-
  /*table css*/
 .table-box {margin:40px;}
 .table {width:1100px; background:#fff; margin:0 auto; padding:60px; text-align:center;}
@@ -81,6 +80,9 @@ background:#eeeeee; padding:70px 25px 55px 25px; }
 /*답변 색상*/
 .table-box .complet {background:#53C14B; color:#fff;padding:5px 8px;}
 .table-box .waiting {background:#FF6C6C; color:#fff;padding:5px 8px;}
+
+/*사진 크기*/
+img.mini_img { width: 130px; height: 130px; }
 
  /*page-number css*/
 .page-number {width:1200px; margin:0 auto; background:#fff; text-align:center; line-height:10px; font-size:14px; padding-bottom:140px; }

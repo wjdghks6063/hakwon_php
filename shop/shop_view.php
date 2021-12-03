@@ -166,25 +166,40 @@ $(document).ready(function() {
 		
 		var count = document.getElementById('price_num').value; //input 상자의 값을 count에 넣는다. count에 물건 수량 value 값을 넣는다.
 		var total_price = document.getElementById('total_price_ori').value; // 물건 1개 값. 
-		
-			if(count == "" || count == 0){ count = 1; //물건 수량 칸의 값이 빈칸이거나 0인 경우 수량을 1로 바꾼다.
+
+			if(count == "0"){ count = 1; //물건 수량 칸의 값이 빈칸이거나 0인 경우 수량을 1로 바꾼다.
 				document.getElementById('price_num').value = count; //바꾼 수량 값 1을 수량 입력칸에 넣어준다.
 				
 				document.getElementById('total_price').value = total_price; //물건 가격란에 var total_price 값인 1개 가격을 넣어준다.
 
 				$("#span_total_price").text(total_price); //span 안에 input 의 값을 넣어준다.
+			
+			}if(count == ""){ count = 1; // input이 공백인 경우 수량의 value 값은 1인 상태로 한다. 하지만 input 박스 안은 표시값을 넘겨주지 않아 공백으로 보이게 처리한다.
+
 			}else{
 
-			//	var total_price = document.getElementById('total_price_ori').value; 위쪽에 써놧으므로 상관 없어짐
-						//alert(count);
-						document.getElementById('price_num').value = count; //더해진 값을 다시 input 상자에 넣어준다.
-						total_price = total_price.replace(",", ""); //콤마가 있으면 계산이 안되기 때문에 콤마 있는 total_price 의 콤마 제거해서 다시 total_price 에 넣는다.
-						total_price = Number(total_price)*Number(count); //물건 금액에 카운트 숫자값을 곱해준다.
+				document.getElementById('price_num').value = count; //더해진 값을 다시 input 상자에 넣어준다.
+				total_price = total_price.replace(",", ""); //콤마가 있으면 계산이 안되기 때문에 콤마 있는 total_price 의 콤마 제거해서 다시 total_price 에 넣는다.
+				total_price = Number(total_price)*Number(count); //물건 금액에 카운트 숫자값을 곱해준다.
 
-						var total_price = total_price.toLocaleString(); // 콤마 제거 숫자값에 다시 ,를 해준다.
-						document.getElementById('total_price').value = total_price; //더해진 값을 다시 input 상자에 넣어준다.
-						$("#span_total_price").text(total_price); //span 안에 input 의 값을 넣어준다.
-				}	
+				var total_price = total_price.toLocaleString(); // 콤마 제거 숫자값에 다시 ,를 해준다.
+				document.getElementById('total_price').value = total_price; //더해진 값을 다시 input 상자에 넣어준다.
+				$("#span_total_price").text(total_price); //span 안에 input 의 값을 넣어준다.
+			}	
+	});
+
+	$("#price_num").blur(function(){ //input 안의 포커스가 해제 될 때 작동한다. //물건 수량
+		
+		var count = document.getElementById('price_num').value; //input 상자의 값을 count에 넣는다. count에 물건 수량 value 값을 넣는다.
+		var total_price = document.getElementById('total_price_ori').value; // 물건 1개 값. 
+		
+			if(count == ""){ count = 1; //물건 수량 칸의 값이 빈칸인 경우 포커스가 해제되면 1이 된다.
+				document.getElementById('price_num').value = count; //바꾼 수량 값 1을 수량 입력칸에 넣어준다.
+				
+				document.getElementById('total_price').value = total_price; //물건 가격란에 var total_price 값인 1개 가격을 넣어준다.
+
+				$("#span_total_price").text(total_price); //span 안에 input 의 값을 넣어준다.
+			}
 	});
 
 });
@@ -230,7 +245,7 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 					<span> <?=$row["shop_name"]?> | <?=$row["reg_date"]?> | </span></h3><br>
 					<span><? include("shop/_m3rating.php"); //별점평가?></span><br>
 					<div class="maybeday">	
-						<span class="maybedaybig"> 배송 예정일자 :</span> <span class="maybeday"> <?=$month?>-<?=$day?>-<?=$yoil?> 도착 예정</span>
+						<span class="maybedaybig"> 배송 예정일자 :</span> <span class="maybeday"> <?=$month?>-<?=$day?>-( <?=$yoil?> ) 도착 예정</span>
 					</div>
 					<span class="total_price">
 					<!--input type의 값을 span으로 불러와 사용하기 떄문에 inputtype을 만들어 숨겨둔다. -->		
@@ -269,7 +284,7 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 					<div class="prod-buy-footer ">
 						<div class="prod-order-data" style="display:none;"></div>
 						<div class="prod-onetime-order">
-							<button class="prod-cart-btn" onclick="javascript:goBasket()">
+							<button class="prod-cart-btn" id="prod-cart-btn" onclick="javascript:goBasket()">
 								<i class="fas fa-cart-arrow-down"></i> 장바구니 담기
 							</button>
 							<button class="prod-buy-btn" onclick="javascript:goBuy()">
@@ -283,6 +298,31 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 					</div>
 			
 					</div>
+
+					<script type="text/javascript" language="javascript">
+						$('#prod-cart-btn').click(function(){
+							alert("aaa");
+							
+							$.ajax({
+								
+								type : "POST",
+								url : "ajaxData.jsp?type=1",
+								dataType : "date",
+								error : function(){
+									alert('통신실패!!');
+								},
+								success : function(data){
+									alert("통신데이터 값 : " + data) ;
+									$("#dataArea").html(data) ;
+								}
+								
+							});
+							
+
+						});
+
+					</script>
+
 							
 				</div>	
 			</div>

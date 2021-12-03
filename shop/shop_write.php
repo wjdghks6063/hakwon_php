@@ -50,12 +50,16 @@
 							</tr>
 							<tr>
 								<th><label for="title">물품 가격</label></th>
-								<td><input type="text" name="t_price" id="number" class="number" placeholder="수량을 입력해주세요."
+								<td><input type="text" name="t_price" id="number" class="number" placeholder="가격을 입력해주세요."
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"></td>
 							</tr>
 							<tr>
 								<th><label for="title">회사 명</label></th>
 								<td><input type="text" name="t_shop_name" id="number" class="number" placeholder="회사 상호명을 입력해주세요."></td>
+							</tr>
+							<tr>
+								<th><label for="title">일련 번호</label></th>
+								<td><input type="text" name="t_price_code" id="number" class="number" placeholder="일련번호를 입력해주세요."></td>
 							</tr>
 							
 							<tr>
@@ -108,7 +112,11 @@
 					}
 				
 				if(checkValue(shop.t_title,"제목을 입력해주세요.")) return;
-				if(checkValue(shop.t_content,"내용을 입력해주세요.")) return;
+				if(checkValue(shop.t_content,"상세정보를 입력해주세요.")) return;
+				if(checkValue(shop.t_stuff_number,"수량을 입력해주세요.")) return;
+				if(checkValue(shop.t_price,"가격을 입력해주세요.")) return;
+				if(checkValue(shop.t_shop_name,"상호를 입력해주세요.")) return;
+				if(checkValue(shop.t_price_code,"제품코드를 입력해주세요.")) return;
 				shop.method="post";
 				shop.action="db_shop_save.php";
 				shop.submit();

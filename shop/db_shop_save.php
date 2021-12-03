@@ -23,11 +23,12 @@
     $title = addslashes($_POST["t_title"]); //addslashes();는  '' , "" 같은 특수문자도 db에 넣을 수 있게 해준다.
     $content = addslashes($_POST["t_content"]);
     $attach_name = $_FILES['t_attach']['name'];
-    $stuff_number = $_POST["t_stuff_number"];
-    $price = $_POST["t_price"];
-    $title = $_POST["t_title"];
     $reg_id = $_SESSION["session_id"];
     $reg_date_time = date("y-m-d h:i:s", time());
+    $shop_name = $_POST["t_shop_name"];
+    $price = $_POST["t_price"];
+    $stuff_number = $_POST["t_stuff_number"];
+    $price_code = $_POST["t_price_code"];
 
     $dbattachname = $maxNo."_".$attach;
 
@@ -49,9 +50,9 @@
 
 
     $query ="insert into h_shop ".
-        "(no,title,content,attach, reg_id,reg_date) ".
-        "values ".
-        "($maxNo,'$title','$content','$attach_db_name','$reg_id','$reg_date_time')";
+            "(no, title, content, attach, reg_id, reg_date, shop_name, price, stuff_number, price_code) ".
+            "values ".
+            "($maxNo, '$title', '$content', '$attach_name', '$reg_id', '$reg_date_time', '$shop_name', $price, $stuff_number, '$price_code')" ;
 
         echo $query;
     $result = mysqli_query($connect, $query);
