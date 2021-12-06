@@ -32,7 +32,7 @@
 					</div>
 						
 						<p class="btn">
-						<a href="#">ID/PW찾기</a>
+						<a href="find_password.php">ID/PW찾기</a>
 						<a href="join.php">회원가입</a>
 						</p>
 						

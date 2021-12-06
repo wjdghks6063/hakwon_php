@@ -115,6 +115,19 @@
                             $('input[name=selected_all]').prop('checked', this.checked);
                         });
 
+						//체크된 개수에 따라 전체 체크박스 활성/비활성 
+						function setCheckAll() {
+							var checkTotal = $('.list_agree').find('input:checkbox').not('#checkbox_all').length;
+							var checkCount = 0;
+							$('.list_agree').find('input:checkbox').not('#checkbox_all').each(function () {
+							if ($(this).prop('checked')) {
+							checkCount++;
+							}
+							});
+
+							$('#checkbox_all').prop('checked', checkTotal == checkCount);
+						}
+
    //                     $('input:not[name=selected]').on('change', function(){ 
     //                        $('input[name=selected_all]').prop('checked', this.checked);
     //                    });
@@ -135,26 +148,9 @@
                             })
                         })
 */
-                        /**xxxxxxxxxxxxxxxxxxxxxxxx */
 
-                        $(".checkbox_group").on("click", "#check_all", function () {
-                            var checked = $(this).is(":checked");
 
-                            if(checked){
-                                $(this).siblings('input').prop("checked", true);
-                            } else {
-                                $(this).siblings('input').prop("checked", false);
-                            }
-                        });
-
-                        $(".checkbox_group").on('click', 'input:not(#check_all)', function () {
-                            var is_checked = true;
-                            $(".checkbox_group input:not(#check_all)").each(function() {
-                            is_checked =  is_checked && $(this).is(":checked");
-                            })
-                            $("#check_all").prop("checked", is_checked)
-                        });
-
+						//db로 보내기
                         var arr = $('input[name=selected]:checked').serializeArray().map(function(item) { return item.value });
                         //var str = $('input[name=_selected_]:checked').serialize(); // 이건 QueryString 방식으로 
 

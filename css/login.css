@@ -75,7 +75,7 @@ background:#eeeeee; padding:70px 25px 55px 25px; }
 
 /* login css */
 .login-box {width:50%; margin:0 auto; background:#EFF8FB; overflow:hidden; padding:20px 40px; }
-.login-box .left-box {width:60%; float:left; margin:20px 0 0 20px; padding-left:40px;}
+.login-box .left-box {width:60%; float:left; margin:20px 0 0 20px; padding-left:10px;}
 .login-box .left-box .txt {width:80%; height:45px;  border:1px solid #999; border-radius:4px; margin-bottom:10px; font-family:Nanum Barun Gothic;}
 .login-box .right-box {width:20%; margin:20px 0; float:left;}
 .login-box .right-box .log {color:#fff; background:#6dacb8; font-size:17px; width:100%; height:100px; cursor:pointer;}

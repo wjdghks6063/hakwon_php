@@ -41,12 +41,6 @@
 		goBackPage.action ="shop_list.php";
 		goBackPage.submit();
 	}
-	function goBasket(){
-		alert("상품이 장바구니에 담겼습니다.");
-		goBackPage.method ="post";
-		goBackPage.action ="shop_list.php";
-	//	goBackPage.submit();
-	}
 	function goBuy(){
 		alert("aaa");
 		goBackPage.method ="post";
@@ -256,10 +250,11 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 
 					<div class="prod-sale-price  wow-coupon-discount ">
 						<h3><span class="total-price" name="total_price" id="span_total_price" ><?=$row["price"]?>	
-						</span><span class="won" id="won">원</span></h3>
+						</span><span class="won" id="won">원 </span></h3>
 					</div>
 				
 					<div class="stuff_number"><span> 현재 수량: <?=$row["stuff_number"]?> 개</span></div>
+					<!--전체 수량-->
 					<input type="hidden" id="maxcount" value="<?=$row["stuff_number"]?>">
 					
 				<p class="txt"><?=$t_content?></p>
@@ -300,25 +295,41 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 					</div>
 
 					<script type="text/javascript" language="javascript">
-						$('#prod-cart-btn').click(function(){
-							alert("aaa");
-							
-							$.ajax({
+						$(document).ready(function(){ 
+							$('#prod-cart-btn').click(function(){
 								
-								type : "POST",
-								url : "ajaxData.jsp?type=1",
-								dataType : "date",
-								error : function(){
-									alert('통신실패!!');
-								},
-								success : function(data){
-									alert("통신데이터 값 : " + data) ;
-									$("#dataArea").html(data) ;
-								}
+								var id = "<?=$session_id?>"; //common_header 값을 불러다 쓴다.
 								
-							});
+								var t_price_code = "<?=$row["price_code"]?>"; // query문의 물건 코드값을 가져온다.
+								
+								var t_total_price = $("#total_price").val(); //css 처럼 $("#total_price") id의 value값을 가져온다.
+								var t_total_price = t_total_price.replace(",", ""); // db에 집어넣을것이기 때문에 ,를 제거 작업해준다.
+								
+								var t_price_num = $("#price_num").val(); //css 처럼 id="price_num"의 value를 가져온다.
+
+								var t_price_name = "<?=$row["title"]?>";
+
+								$.ajax({
+									type : "POST",
+									/*async: false 속성이 추가  jQuery의 Ajax호출은 async: true가 기본이며, 이 속성을 기입하지 않는다면 기본적으로 비동기식으로 동작하게 됩니다. 
+									하지만 이 속성을 false로 설정하게되면 동기식방식으로 
+									이제 ajax를 호출하여 서버에서 응답을 기다렸다가 응답을 모두 완료한 후 다음 로직을 실행하는 동기식으로 변경한 것입니다.*/
+
+									async: false, // 이걸 사용 하면 반복문 돌듯이 한번에 var들이 실행되지 않고 var id 를 받고 다시 위에서부터 내려온다.									
+									url : "db_pushBasket.php",
+									data: "t_id="+id+"&t_price_code="+t_price_code+"&t_total_price="+t_total_price+"&t_price_num="+t_price_num+"&t_price_name="+t_price_name,
+									error : function(){
+										alert('통신실패!!');
+									},
+									success : function(data){
+										alert("통신데이터 값 : " + data) ;
+										$("#dataArea").html(data) ;
+									}
+									
+								});
 							
 
+							});
 						});
 
 					</script>

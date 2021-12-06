@@ -35,35 +35,8 @@
 		pageForm.action ="notice_list.php";
 		pageForm.submit();
 	}
-	function goUpdateHit(index){ //goUpdateHit('<?=$k?>') 로 몇번째 자리의 번호를 받아온다.
-		var ff = notiArr.t_hit;
-		var gubun = Object.prototype.toString.call(ff); //명령어에 배열 반복 돌리는것(value)를 넣어준다.
-		//배열일 경우 ex)같은 이름을 가진게 2개 이상 있을 떄 [object RadioNodeList] // 배열이 아닐 때 ex)같은 이름이 1개만 있을 때 [object HTMLInputElement]
-		if(gubun == "[object RadioNodeList]"){ //gubun에 [object RadioNodeList] = 같은 이름을 가진 배열이 2개 이상 돌 때
-//			alert("배열이다");
-			var hitValue = notiArr.t_hit[index].value; //배열인 경우 번호값을 넣어줘서 몇번쨰 자리의 값인지 찾아준다.
-			var no = notiArr.t_no[index].value;
-		//	alert(no);
-		//	alert(hitValue);
-			hitForm.t_no.value=no;
-			hitForm.t_hit.value=hitValue;
-
-		} else{ //하나만 있을 때
-			var hitValue = notiArr.t_hit.value; //번호가 1개라 배열이 없는 경우는 [index]로 자리를 찾지 않는다.
-			var no = notiArr.t_no.value;
-		
-			hitForm.t_no.value=no; //form hitForm으로 이름에 value를 넣어서 넘긴다.
-			hitForm.t_hit.value=hitValue;
-		}
-		hitForm.method="post";
-		hitForm.action="db_notice_hitupdate.php";
-		hitForm.submit();
-	}
 </script>
-<form name="hitForm">
-	<input type="hidden" name="t_no">
-	<input type="hidden" name="t_hit">
-</form>
+
 <form name="notice">
 	<input type="hidden" name="t_no">
 	<input type="hidden" name="t_page" value="<?=$t_page?>">
@@ -103,27 +76,20 @@
 							<th scope="col">조회수</th>
 						</tr>
 					</thead>
-				<form name ="notiArr">	
+					
 					<tbody>
 					<?for($k=0;$k<$count;$k++){ //압축되어있는 놈을 한줄씩한줄씩 뺴서 로우에 담는다
 						$row = mysqli_fetch_array($result);
 					?>	
 						<tr>
 						<td><?=$row["no"]?></td>
-						<td class="txt"><a href="javascript:goView('<?=$row["no"]?>')"><?=$row["title"]?></a>
-							<input type="hidden" name="t_no" value="<?=$row["no"]?>">
-							<input type="text" name="t_hit" value="<?=$row["hit"]?>" size="3">
-							<button type="button" onclick="goUpdateHit('<?=$k?>')">Hit update</button> <!--k는 for($k=0;$k<$count;$k++) 의 카운트 숫자 / 몇번째 자리인가 -->
-					
-					
-						</td>
+						<td class="txt"><a href="javascript:goView('<?=$row["no"]?>')"><?=$row["title"]?></a></td>
 						<td><?=$row["name"]?></td>
 						<td><?=$row["format_date"]?></td>
 						<td><?=$row["hit"]?></td>
 						</tr>
 					<?}?>
 					</tbody>
-				</form>	
 				</table>
 			</div>
 			
