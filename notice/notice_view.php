@@ -123,7 +123,8 @@
 		<script>
 			function goUpdate(){
 				notice.method="post";
-				notice.action="notice_update.php";
+			//	notice.action="notice_update.php"; //썸머노트 사용 전
+				notice.action="notice_update_summernote.php";
 				notice.submit();
 			}
 			function goDelete(){

@@ -13,10 +13,12 @@
 
     $id = $_POST["t_id"];
     $price_code = $_POST["t_price_code"];
-    $price = $_POST["t_total_price"];
+    $price = $_POST["t_price"];
     $price_num = $_POST["t_price_num"];
     $price_name = $_POST["t_price_name"];
 
+/*
+    // 상품이 이미 장바구니에 담겨 있는 경우 물건 코드값을 카운트 돌려서 숫자 1이 나올 경우 장바구니에 담기지 않게 하는 방법
     $querySearch ="select price_code from h_basket ";
     $resultSearch = mysqli_query($connect, $querySearch);
     $rowSearch = mysqli_fetch_array($resultSearch);
@@ -24,27 +26,36 @@
     $query ="select count(*) as count from h_basket ".
             "where price_code ='$price_code' ";
     $result = mysqli_query($connect, $query);
-    $row    = mysqli_fetch_array($result); /*1줄이어도 풀어줘야 쓸수 있다. */
+    $row    = mysqli_fetch_array($result); //1줄이어도 풀어줘야 쓸수 있다. 
     $count  = $row["count"];
+    
+    if($count == '0') {
+        $query ="INSERT INTO h_basket (orderno, id, price_code, price, price_num, price_name) VALUES ($orderNo, '$id', '$price_code', '$price', '$price_num', '$price_name')" ;
+        $result = mysqli_query($connect, $query);
+        //$row    = mysqli_fetch_array($result); 1줄이어도 풀어줘야 쓸수 있다. 
+        $msg ="상품이 장바구니에 담겼습니다.";
+    } else {
+        $msg ="장바구니에 상품이 이미 담겨있습니다.";
+    }
+    //echo $query;
+*/
 
-    $query ="INSERT INTO h_basket (orderno, id, price_code, price, stuff_number, price_name) VALUES ($orderNo, '$id', '$price_code', '$price', '$price_num', '$price_name') 
-        ON DUPLICATE KEY UPDATE stuff_number = $price_num" ; //ON DUPLICATE KEY UPDATE stuff_number = $price_num" ;
+
+//  장바구니에 상품이 없다면 insert 문으로 생성 이미 상품이 존재한다면 update문으로 수량을 변경
+    $query ="INSERT INTO h_basket (orderno, id, price_code, price, price_num, price_name) VALUES ($orderNo, '$id', '$price_code', '$price', '$price_num', '$price_name') 
+        ON DUPLICATE KEY UPDATE  price_num = $price_num" ;
         //stuff_number = stuff_number+$price_num" 는 장바구니의 값에 새로운 값을 더한다. ex) 20+10 = 30; // stuff_number = $price_num 로 하면 기존 20 에서 10으로 수량 교체
-        /* 쉽게 풀면 if(pris code){ pk값이 있는 경우
+        /* 쉽게 풀면 if(price code){ pk값이 있는 경우
             update query
         }else {  pk이 값이 없는 경우 
             insert query 로 작동한다.
         }
         */
         $result = mysqli_query($connect, $query);
-        //$row    = mysqli_fetch_array($result); /*1줄이어도 풀어줘야 쓸수 있다. */
+        //$row    = mysqli_fetch_array($result); 줄이어도 풀어줘야 쓸수 있다. // /
     
-    if($count == '0') {
         $msg ="상품이 장바구니에 담겼습니다.";
-    } else {
-        $msg ="이미 장바구니에 상품이 존재합니다.";
-    }
+
+/*<script>나 공백도 입력 되기때문에 <?=$msg?>만 입력한다.*/
 ?>
-<script>
-	<?=$msg?>
-</script>
+<?=$msg?>

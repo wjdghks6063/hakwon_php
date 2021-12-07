@@ -60,7 +60,7 @@
 				if(checkValue(faq.t_title,"제목을 입력해주세요.")) return;
 				if(checkValue(faq.t_content,"내용을 입력해주세요.")) return;
 				faq.method="post";
-				faq.action="db_faq_save.php"
+				faq.action="db_faq_save_proceduer.php"
 				faq.submit();
 			}
 		</script>

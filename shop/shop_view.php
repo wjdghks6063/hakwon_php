@@ -302,8 +302,8 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 								
 								var t_price_code = "<?=$row["price_code"]?>"; // query문의 물건 코드값을 가져온다.
 								
-								var t_total_price = $("#total_price").val(); //css 처럼 $("#total_price") id의 value값을 가져온다.
-								var t_total_price = t_total_price.replace(",", ""); // db에 집어넣을것이기 때문에 ,를 제거 작업해준다.
+								var t_price = $("#total_price_ori").val(); //css 처럼 $("#total_price_ori") id의 value값을 가져온다.
+								var t_price = t_price.replace(",", ""); // db에 집어넣을것이기 때문에 ,를 제거 작업해준다.
 								
 								var t_price_num = $("#price_num").val(); //css 처럼 id="price_num"의 value를 가져온다.
 
@@ -317,12 +317,12 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 
 									async: false, // 이걸 사용 하면 반복문 돌듯이 한번에 var들이 실행되지 않고 var id 를 받고 다시 위에서부터 내려온다.									
 									url : "db_pushBasket.php",
-									data: "t_id="+id+"&t_price_code="+t_price_code+"&t_total_price="+t_total_price+"&t_price_num="+t_price_num+"&t_price_name="+t_price_name,
+									data: "t_id="+id+"&t_price_code="+t_price_code+"&t_price="+t_price+"&t_price_num="+t_price_num+"&t_price_name="+t_price_name,
 									error : function(){
 										alert('통신실패!!');
 									},
 									success : function(data){
-										alert("통신데이터 값 : " + data) ;
+										alert(data) ;
 										$("#dataArea").html(data) ;
 									}
 									
