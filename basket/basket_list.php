@@ -13,8 +13,9 @@
 	$t_page =$_POST['t_page']; // view에 갔다가 목록이나 뒤로 가기를 했을 때 현재 페이징 넘버로 가질 수 있게 해준다.
 /**********************************************************************/
 
-	$query ="SELECT a.attach, a.title, b.price_num, b.price, a.reg_date, a.shop_name, b.price_code, b.orderno, b.id FROM h_shop a, h_basket b ".
+	$query ="SELECT a.no, a.attach, a.title, b.price_num, b.price, b.reg_date, a.shop_name, a.stuff_number, b.price_code, b.orderno, b.id FROM h_shop a, h_basket b ".
             "where a.price_code = b.price_code ".
+			"and b.id = '$session_id' ".
             "order by orderno desc ".
 			"limit $start, $end ";
 
@@ -24,11 +25,11 @@
 ?>	
 		<!--  header end -->
 <script>
-	function goView(id){
-		info.t_id.value=id;
-		info.method="post";
-		info.action="info_view.php";
-		info.submit();
+	function goView(no){
+		price_form.t_no.value=no;
+		price_form.method="post";
+		price_form.action="/shop/shop_view.php";
+		price_form.submit();
 	}
 	function goPage(pageNumber){		
 		pageForm.t_page.value = pageNumber;
@@ -36,49 +37,69 @@
 		pageForm.action ="basket_list.php";
 		pageForm.submit();
 	}
-	function goExit(id){
-		info.t_id.value=id;
-		info.method="post";
-		info.action="/member/db_top_exit.php";
-		info.submit();
+	function goDelete(orderno){
+		if(confirm("장바구니에서 제외 하시겠습니까?")){
+		price_form.t_orderno.value=orderno;
+		price_form.method="post";
+		price_form.action="db_basket_delete.php";
+		price_form.submit();
+		}
 	}
 	function goUpdateHit(index){ //goUpdateHit('<?=$k?>') 로 몇번째 자리의 번호를 받아온다.
+
 		var ff = notiArr.t_check;
+		
 		var gubun = Object.prototype.toString.call(ff); //명령어에 배열 반복 돌리는것(value)를 넣어준다.
+		// alert(gubun);
 		//배열일 경우 ex)같은 이름을 가진게 2개 이상 있을 떄 [object RadioNodeList] // 배열이 아닐 때 ex)같은 이름이 1개만 있을 때 [object HTMLInputElement]
 		if(gubun == "[object RadioNodeList]"){ //gubun에 [object RadioNodeList] = 같은 이름을 가진 배열이 2개 이상 돌 때
 //			alert("배열이다");
-
 		
-		if(!notiArr.t_check[index].value) {
-    		notiArr.t_check[index].value = 'n';
+		/*notiArr.t_check[index]의 값을 넘겨주는것이 아니라 .checked로 체크 여부로 조회한다. */
+		if(notiArr.t_check[index].checked == true) { //체크 하여 ture로 나온 경우 value 값을 y로 준다.
+			notiArr.t_check[index].value = 'y';
+		}else{
+			notiArr.t_check[index].value = 'n';	// 체크 되지 않아 false로 나온 경우 value값을 n으로 준다.
 		}
-			var checkValue = notiArr.t_check[index].value; //배열인 경우 번호값을 넣어줘서 몇번쨰 자리의 값인지 찾아준다.
+			var check = notiArr.t_check[index].value; //배열인 경우 번호값을 넣어줘서 몇번쨰 자리의 값인지 찾아준다.
 			var orderno = notiArr.t_orderno[index].value;
-			alert(orderno);
-			alert(checkValue);
+			var price_num = notiArr.t_price_num[index].value;
+			alert("상품 리스트 번호 : "+orderno);
+			alert("체크 여부 : "+check);
+			alert("상품 수량 : "+price_num);
 		//	hitForm.t_no.value=no;
-			numForm.t_price_num.value= numValue;
+
+			price_form.t_check.value= check;
+			price_form.t_orderno.value= orderno;
+			price_form.t_price_num.value= price_num;
+
 		} else{ //하나만 있을 때
-			var numValue = notiArr.t_price_num.value; //번호가 1개라 배열이 없는 경우는 [index]로 자리를 찾지 않는다.
-			var id = notiArr.t_id.value;
-		
-			numForm.t_id.value=id; //form hitForm으로 이름에 value를 넣어서 넘긴다.
-			numForm.t_price_num.value= numValue;
+
+			// alert(notiArr.t_check.checked); true,false 구분
+			if(notiArr.t_check.checked == true) { //체크 하여 ture로 나온 경우 value 값을 y로 준다.
+				notiArr.t_check.value = 'y';
+			}else{
+				notiArr.t_check.value = 'n';	// 체크 되지 않아 false로 나온 경우 value값을 n으로 준다.
+			}
+
+			var check = notiArr.t_check.value;
+			var orderno = notiArr.t_orderno.value;
+			var price_num = notiArr.t_price_num.value; //번호가 1개라 배열이 없는 경우는 [index]로 자리를 찾지 않는다.
+			
+			price_form.t_check.value= check;
+			price_form.t_orderno.value= orderno;
+			price_form.t_price_num.value= price_num;
 		}
 		
-		numForm.method="post";
-		numForm.action="/notice/db_notice_hitupdate.php";
-		numForm.submit();
+		price_form.method="post";
+		price_form.action="/notice/db_notice_hitupdate.php";
+		price_form.submit();
 	}
 </script>
-<form name="numForm">
-	<input type="hidden" name="t_id">
+<form name="price_form">
+	<input type="hidden" name="t_check">
+	<input type="hidden" name="t_orderno">
 	<input type="hidden" name="t_price_num">
-</form>
-<form name="info">
-	<input type="hidden" name="t_id" value="<?=$id?>">
-	<input type="hidden" name="t_page" value="<?=$t_page?>">
 </form>
 
 <form name ="pageForm">
@@ -101,7 +122,7 @@
 						<col width="4%">
 						<col width="8%">
 						<col width="*%">
-						<col width="7%">
+						<col width="8%">
 						<col width="12%">
 						<col width="10%">
 						<col width="12%">
@@ -110,7 +131,7 @@
 					
 					<thead>
 						<tr>
-							<th scope="col"><input type="checkbox" name="selected_all"></th>
+							<th scope="col"><input type="checkbox" id="cbx_chkAll"></th>
 							<th scope="col">사진</th>
 							<th scope="col">제품명</th>
 							<th scope="col">구매 수량</th>
@@ -125,73 +146,40 @@
 			<form name ="notiArr">	
 				<?for($k=0;$k<$count;$k++){ //압축되어있는 놈을 한줄씩한줄씩 뺴서 로우에 담는다
 						$row = mysqli_fetch_array($result);
-						$price = ($row["price"]*$row["price_num"]); //상품 가격에 상품 수량을 곱하여 총액을 $price에 담아서 사용한다.
 				?>	
 					<tr>
 						<td>
 							<input type="hidden" name="t_orderno" value="<?=$row["orderno"]?>">
-							<input type="checkbox" name="t_check" value="y" size="3">
+							<input type="checkbox" name="t_check" size="3">	
 							<button type="button" onclick="goUpdateHit('<?=$k?>')">Hit update</button> <!--k는 for($k=0;$k<$count;$k++) 의 카운트 숫자 / 몇번째 자리인가 -->
 						</td>		
-						<td><a href="javascript:goView('<?=$row["id"]?>')"><span class="img"><img class="mini_img" src="/file_room/shop/<?=$row["attach"]?>" alt="shop1"></span></a></td>
-						<td><a href="javascript:goView('<?=$row["id"]?>')"><?=$row["title"]?></td>
+						<td><a href="javascript:goView('<?=$row["no"]?>')"><span class="img"><img class="mini_img" src="/file_room/shop/<?=$row["attach"]?>" alt="shop1"></span></a></td>
+						<td><a href="javascript:goView('<?=$row["no"]?>')"><?=$row["title"]?></td>
 						<td><?=$row["price_num"]?></td>
-						<td><?=$price?></td>
+						<td><?=$row["price_num"]*$row["price"]?></td>
 						<td><?=$row["reg_date"]?></td>
 						<td><?=$row["shop_name"]?></td>
-						<td><a href="javascript:goExit('<?=$row["id"]?>')"><i class="fas fa-trash"></i></a></td>
+						<td><a href="javascript:goDelete('<?=$row["orderno"]?>')"><i class="fas fa-trash"></i></a></td>
 			<?}?>
 			</form>
 					</tr>
 
                     <script>
-                          //전체 체크박스 클릭시 전부 체크 되고 해제 됨 전체 체크 박스 :"selected_all"
-                        $('input[name=selected_all]').on('change', function(){ 
-                            $('input[name=selected]').prop('checked', this.checked);
-                        });
-
-                        $('input[name=selected]').on('change', function(){ 
-                            $('input[name=selected_all]').prop('checked', this.checked);
-                        });
-
-						//체크된 개수에 따라 전체 체크박스 활성/비활성 
-						function setCheckAll() {
-							var checkTotal = $('.list_agree').find('input:checkbox').not('#checkbox_all').length;
-							var checkCount = 0;
-							$('.list_agree').find('input:checkbox').not('#checkbox_all').each(function () {
-							if ($(this).prop('checked')) {
-							checkCount++;
-							}
+						
+						$(document).ready(function() {
+							$("#cbx_chkAll").click(function() { //<input type="checkbox" id="cbx_chkAll"> 가 체크 될 때 작동한다.
+								if($("#cbx_chkAll").is(":checked")) $(".table input[name=t_check]").prop("checked", true); // 전체 체크가 체크 되었다면 input type 이름이 t_check인 것들은 checked 값이 ture(체크)가 된다.
+								else $(".table input[name=t_check]").prop("checked", false);
 							});
+							
+							$("input[name=t_check]").click(function() {
+								var total = $(".table input[name=t_check]").length;
+								var checked = $(".table input[name=t_check]:checked").length;
 
-							$('#checkbox_all').prop('checked', checkTotal == checkCount);
-						}
-
-   //                     $('input:not[name=selected]').on('change', function(){ 
-    //                        $('input[name=selected_all]').prop('checked', this.checked);
-    //                    });
-
-/* 방법 2
-                        $(document).ready(function(){
-                            //최상단 체크박스 클릭
-                            $('input[name=selected_all]').click(function(){
-                                //클릭되었으면
-                                if($('input[name=selected_all]').prop("checked")){
-                                    //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 true로 정의
-                                    $("input[name=selected]").prop("checked",true);
-                                    //클릭이 안되있으면
-                                }else{
-                                    //input태그의 name이 chk인 태그들을 찾아서 checked옵션을 false로 정의
-                                    $("input[name=selected]").prop("checked",false);
-                                }
-                            })
-                        })
-*/
-
-
-						//db로 보내기
-                        var arr = $('input[name=selected]:checked').serializeArray().map(function(item) { return item.value });
-                        //var str = $('input[name=_selected_]:checked').serialize(); // 이건 QueryString 방식으로 
+								if(total != checked) $("#cbx_chkAll").prop("checked", false);
+								else $("#cbx_chkAll").prop("checked", true); 
+							});
+						});
 
                     </script>
 

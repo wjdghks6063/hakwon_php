@@ -42,8 +42,8 @@
 
 
 //  장바구니에 상품이 없다면 insert 문으로 생성 이미 상품이 존재한다면 update문으로 수량을 변경
-    $query ="INSERT INTO h_basket (orderno, id, price_code, price, price_num, price_name) VALUES ($orderNo, '$id', '$price_code', '$price', '$price_num', '$price_name') 
-        ON DUPLICATE KEY UPDATE  price_num = $price_num" ;
+    $query ="INSERT INTO h_basket (orderno, id, price_code, price, price_num, price_name, reg_date) VALUES ($orderNo, '$id', '$price_code', '$price', '$price_num', '$price_name', DATE_FORMAT(now(), '%Y-%m-%d')) 
+        ON DUPLICATE KEY UPDATE  price_num = $price_num , reg_date = DATE_FORMAT(now(), '%Y-%m-%d') ";
         //stuff_number = stuff_number+$price_num" 는 장바구니의 값에 새로운 값을 더한다. ex) 20+10 = 30; // stuff_number = $price_num 로 하면 기존 20 에서 10으로 수량 교체
         /* 쉽게 풀면 if(price code){ pk값이 있는 경우
             update query

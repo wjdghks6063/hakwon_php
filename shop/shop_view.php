@@ -309,6 +309,11 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 
 								var t_price_name = "<?=$row["title"]?>";
 
+								if(id ==""){
+									alert("로그인 후 이용 가능합니다.");
+									return;
+								}
+
 								$.ajax({
 									type : "POST",
 									/*async: false 속성이 추가  jQuery의 Ajax호출은 async: true가 기본이며, 이 속성을 기입하지 않는다면 기본적으로 비동기식으로 동작하게 됩니다. 

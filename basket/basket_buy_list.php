@@ -13,7 +13,7 @@
 	$t_page =$_POST['t_page']; // view에 갔다가 목록이나 뒤로 가기를 했을 때 현재 페이징 넘버로 가질 수 있게 해준다.
 /**********************************************************************/
 
-	$query ="SELECT a.attach,a.title,a.stuff_number,a.price,a.reg_date,a.shop_name, b.price_code,b.orderno FROM h_shop a, h_basket b ".
+	$query ="SELECT a.attach,a.title,a.stuff_number,a.price,b.reg_date,a.shop_name, b.price_code,b.orderno FROM h_shop a, h_basket b ".
             "where a.price_code = b.price_code ".
             "order by orderno desc ".
 			"limit $start, $end ";
