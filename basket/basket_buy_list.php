@@ -13,9 +13,9 @@
 	$t_page =$_POST['t_page']; // view에 갔다가 목록이나 뒤로 가기를 했을 때 현재 페이징 넘버로 가질 수 있게 해준다.
 /**********************************************************************/
 
-	$query ="SELECT a.attach,a.title,a.stuff_number,a.price,b.reg_date,a.shop_name, b.price_code,b.orderno FROM h_shop a, h_basket b ".
-            "where a.price_code = b.price_code ".
-            "order by orderno desc ".
+	$query ="SELECT b.no, b.id, a.title, a.attach, b.price_code, b.price, b.price_num, b.reg_date, a.shop_name FROM h_shop a, h_buy_list b ".
+			"where a.price_code = b.price_code ".
+			"order by no desc ".
 			"limit $start, $end ";
 	$result = mysqli_query($connect,$query);
 										
@@ -97,7 +97,7 @@
 						<td><input type="checkbox"></td>		
 						<td><a href="javascript:goView('<?=$row["id"]?>')"><span class="img"><img class="mini_img" src="/file_room/shop/<?=$row["attach"]?>" alt="shop1"></span></a></td>
 						<td><a href="javascript:goView('<?=$row["id"]?>')"><?=$row["title"]?></td>
-						<td><?=$row["stuff_number"]?></td>
+						<td><?=$row["price_num"]?></td>
 						<td><?=$row["price"]?></td>
 						<td><?=$row["reg_date"]?></td>
 						<td><?=$row["shop_name"]?></td>

@@ -232,7 +232,7 @@
 				}else if(type === '50000')  {
 					number = parseInt(resultElement) + 50000;
 				}
-				
+				total_price = total_price.toLocaleString();
 				mem.point.value = number;
 			}
 /* 버튼으로 숫자 더하기 원본
@@ -292,6 +292,8 @@
 				if(checkValue(mem.t_address_1,"주소를 입력해주세요.")) return;
 				if(checkValue(mem.t_address_2,"상세주소를 입력해주세요.")) return;
 
+				if(checkValue(mem.t_level,"등급을 설정해주세요.")) return;
+
 /*
 				if(all.id.value=="") {
 					alert("아이디를 입력해주세요");
@@ -344,54 +346,7 @@
 				}
 			}			
 			
-		</script>
-
-
-		<!-- *소스 예시 <label for="rcvordAm">수주액</label>
-					<input type="text" id="rcvordAm" name="rcvordAm" numberOnlyMinComma="true" koreanCurrency="true" value="" required="required"> -->
-		<script> //숫자만 입력 가능 및 3번째 숫자마다 콤마 찍어주기
-			$(document).on("keyup", "input:text[numberOnlyMinComma]", function()	{
-				var strVal = $(this).val();
-
-				event = event || window.event;
-				var keyID = (event.which) ? event.which : event.keyCode;
-
-				if( ( keyID >=48 && keyID <= 57 ) || ( keyID >=96 && keyID <= 105 )
-							|| keyID == 46 || keyID == 8 || keyID == 109
-							|| keyID == 189 || keyID == 9
-							|| keyID == 37 || keyID == 39){
-
-					if(strVal.length > 1 && (keyID == 109 || keyID == 189)){
-						return false;
-					}else{
-						return;
-					}
-				}else{
-					return false;
-				}
-			});
-
-			$(document).on("keyup", "input:text[numberOnlyMinComma]", function()	{
-				$(this).val( $(this).val().replace(/[^-\.0-9]/gi,"") );
-				$(this).val( $(this).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );
-			});
-			
-			/* 입력을 마쳤을 때 자동으로 "원" 표시 (물론 입력 후 저장할 때 숫자만 입력되도록 back-end에서 콤마(,)와 '원'표시를 지워줘야 하고,
-				DB에서 불러올 경우 다시 콤마(,)와 '원'을 표시해 줘야 하는, 번거로운 작업이 이루어져야 한다.) */
-			$(document).on("focusout", "input:text[koreanCurrency]", function()	{
-				$(this).val( $(this).val().replace(",","") );
-				$(this).val( $(this).val().replace(/[^-\.0-9]/gi,"") );
-				$(this).val( $(this).val().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") );
-				if($(this).val() != '' ) {
-					$(this).val( $(this).val()+'원');
-				}		
-			});
-
-			$(document).on("focus", "input:text[koreanCurrency]", function()	{	
-				$(this).val( $(this).val().replace("원", ""));
-			});
-		</script>		
-				
+		</script>				
 	
 	</body>
 </html>

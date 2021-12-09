@@ -54,11 +54,5 @@
         */
         $result = mysqli_query($connect, $query);
         //$row    = mysqli_fetch_array($result); 줄이어도 풀어줘야 쓸수 있다. // /
-    
-        if($result == 1) $msg ="상품이 장바구니에 담겼습니다.";
-        else $msg ="문제가 발생하였습니다.";
-        
 
-/*<script>나 공백도 입력 되기때문에 <?=$msg?>만 입력한다.*/
 ?>
-<?=$msg?>
