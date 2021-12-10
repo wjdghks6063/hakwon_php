@@ -49,7 +49,7 @@
                      return;
                   }
                }
-             }else{
+            }else{
                //배열인경우 체크가 하나도 안됐을 때 안넘기기
                var chkCount=0;
                var len = notiArr.elements['t_chk[]'].length; //배열의 길이

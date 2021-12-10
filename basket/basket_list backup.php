@@ -60,33 +60,79 @@
 		}
 	}
 	function goCheckbuy(){
-		if(typeof(notiArr.elements['t_check[]'].length)!="undefined"){ //배열이 돌기 때문에 type은 number가 나온다. type이 undefined 가 아닌 경우
-			var chkCount =0; //체크 카운트 생성
-			var len = notiArr.elements['t_check[]'].length; //배열의 길이 (숫자로 표시)
-				for(var k=0;k<len;k++){
-					if(notiArr.elements['t_check[]'][k].checked==true){ //배열의 체크값 만큼 카운트가 1씩 올라간다. ex) 2개 체크시 +2
-                        chkCount++;
-                    }
-                }
-				if(chkCount==0){ //배열에 체크가 없는 경우 /카운트 0
-                    alert("상품을 선택해 주세요.");
-                    return;
-                }
-			}else{
-				if(notiArr.elements['t_check[]'].checked==false){ //1개밖에 존재하지않아 배열이 없는 경우엔 배열인 [k]을 빼고 체크 여부가 false(비체크) 인 경우
-					alert("상품을 선택해 주세요.");
-                    return;
-				}
-			}
-		if(confirm("선택한 상품을 구매 하시겠습니까?")){		
-				notiArr.method="post";
-				notiArr.action="db_buy_basket.php";
-				notiArr.submit();
+		if(confirm("선택한 상품을 구매 하시겠습니까?")){
+			notiArr.method="post";
+			notiArr.action="db_buy_basket.php";
+			notiArr.submit();
 		}
 	}
 
-</script>
+	function goUpdateHit(index){ //goUpdateHit('<?=$k?>') 로 몇번째 자리의 번호를 받아온다.
 
+		var ff = notiArr.t_check;
+		
+		var gubun = Object.prototype.toString.call(ff); //명령어에 배열 반복 돌리는것(value)를 넣어준다.
+			alert(gubun);
+		//배열일 경우 ex)같은 이름을 가진게 2개 이상 있을 떄 [object RadioNodeList] // 배열이 아닐 때 ex)같은 이름이 1개만 있을 때 [object HTMLInputElement]
+		if(gubun == "[object RadioNodeList]"){ //gubun에 [object RadioNodeList] = 같은 이름을 가진 배열이 2개 이상 돌 때
+//			alert("배열이다");
+		
+		//	alert(notiArr.t_check[index].checked); //체크 여부 테스트
+		/*notiArr.t_check[index]의 값을 넘겨주는것이 아니라 .checked로 체크 여부로 조회한다. */
+
+		
+		if(notiArr.t_check[index].checked == true) { //체크 하여 ture로 나온 경우 value 값을 y로 준다.
+			notiArr.t_check[index].value = 'y';
+		}else{
+			notiArr.t_check[index].value = 'n';	// 체크 되지 않아 false로 나온 경우 value값을 n으로 준다.
+		}
+	
+		//	alert(notiArr.t_check[index].value); // check 여부에 따라 y,n으로 표시된다.
+			
+			var check = notiArr.t_check[index].value; //배열인 경우 번호값을 넣어줘서 몇번쨰 자리의 값인지 찾아준다. 
+			var orderno = notiArr.t_orderno[index].value;
+			var price_num = notiArr.t_price_num[index].value;
+
+			//테스트
+		//	alert("상품 리스트 번호 : "+orderno);
+		//	alert("체크 여부 : "+check); 
+		//	alert("상품 수량 : "+price_num);
+			
+		//	hitForm.t_no.value=no;
+
+			price_form.t_check.value= check; 
+			price_form.t_orderno.value= orderno;
+			price_form.t_price_num.value= price_num;
+
+		} else{ //하나만 있을 때
+
+		
+			//	alert(notiArr.t_check.checked); true,false 구분
+			if(notiArr.t_check.checked == true) { //체크 하여 ture로 나온 경우 value 값을 y로 준다.
+				notiArr.t_check.value = 'y';
+			}else{
+				notiArr.t_check.value = 'n';	// 체크 되지 않아 false로 나온 경우 value값을 n으로 준다.
+			}
+		
+
+			var check = notiArr.t_check.value; 
+			var orderno = notiArr.t_orderno.value;
+			var price_num = notiArr.t_price_num.value; //번호가 1개라 배열이 없는 경우는 [index]로 자리를 찾지 않는다.
+			
+			price_form.t_check.value= check; 
+			price_form.t_orderno.value= orderno;
+			price_form.t_price_num.value= price_num;
+			
+		//	alert(check); 
+		//	alert(orderno);
+		//	alert(price_num);
+		}
+		
+		price_form.method="post";
+		price_form.action="/notice/db_notice_hitupdate.php";
+		price_form.submit();
+	}
+</script>
 <form name="view">
 	<input type="hidden" name="t_no">
 </form>
@@ -139,17 +185,18 @@
 					</thead>
 					
 					<tbody>
-			<form name ="notiArr">
+			<form name ="notiArr">	
 				<?for($k=0;$k<$count;$k++){ //압축되어있는 놈을 한줄씩한줄씩 뺴서 로우에 담는다
 						$row = mysqli_fetch_array($result);
 				?>	
-					<!--배열을 하나씩 빼내서 hidden으로 값을 숨겨서 넘겨준다.-->
-					<input type="hidden" name="t_orderno[]" value="<?=$row["orderno"]?>"> <!--제품 번호-->
-					<input type="hidden" name="t_price_num[]" value="<?=$row["price_num"]?>"> <!--제품 수량-->
-					<input type="hidden" name="t_price[]" value="<?=$row["price"]?>"> <!--제품 가격-->
-					<input type="hidden" name="t_price_code[]" value="<?=$row["price_code"]?>">	<!--제품 코드-->
 					<tr>
-						<td><input type="checkbox" name="t_check[]" size="3" value=""></td>		
+						<td>
+							<input type="hidden" name="t_orderno" value="<?=$row["orderno"]?>">
+							<input type="hidden" name="t_price_num" value="<?=$row["price_num"]?>">
+							<input type="hidden" name="t_price_code" value="<?=$row["price_code"]?>">
+							<input type="checkbox" name="t_check" size="3">
+							<button type="button" onclick="goUpdateHit('<?=$k?>')">Hit update</button> <!--k는 for($k=0;$k<$count;$k++) 의 카운트 숫자 / 몇번째 자리인가 -->
+						</td>		
 						<td><a href="javascript:goView('<?=$row["no"]?>')"><span class="img"><img class="mini_img" src="/file_room/shop/<?=$row["attach"]?>" alt="shop1"></span></a></td>
 						<td><a href="javascript:goView('<?=$row["no"]?>')"><?=$row["title"]?></td>
 						<td><?=$row["price_num"]?></td>
