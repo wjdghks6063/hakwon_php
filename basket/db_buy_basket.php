@@ -1,7 +1,8 @@
 <?
-    include "common/common_header.php";
+    session_start();
     include "common/dbconnect.php";
-        
+    
+    $id      = $_SESSION["session_id"];
     $orderno = $_POST["t_orderno"];
     $check = $_POST["t_check"];
     $price_num = $_POST["t_price_num"];
@@ -13,16 +14,19 @@
 
     for($k=0;$k<$count;$k++){
         if($check[$k]){
-    
-            echo "===$check[$k]====$orderno[$k]==$price_code[$k]===$price_num[$k]====$price[$k]<br>";
-                //update aaa set 재고 = 재고-$amountArr[$k] where ~;
+            $callProcedure = "call basket_buy_procedure('$id', '$price_code[$k]', $price[$k], $price_num[$k], DATE_FORMAT(now(), '%Y-%m-%d')); "; //실행시키는 것이 아닌 문자열로만 집어 넣었다. $result = mysqli_query($connect, $query); 처럼
+            $stmt = mysqli_prepare($connect, $callProcedure); //prepare를 실행시키기전 준비과정
+            $result = mysqli_stmt_execute($stmt);
         }
     }
+    echo $callProcedure;
 
-    echo "orderno : $orderno <br>";
-    echo " check : $check <br>";
-    echo "price_num : $price_num <br>";
-    echo "price_code : $price_code <br>";
+    if($result == 1) $msg ="등록되었습니다.";
+    else $msg ="등록 실패";
     
 ?>
-<script>    
+<script>
+    alert("<?=$msg?>");
+//    location.href="basket_list.php";
+</script>
+

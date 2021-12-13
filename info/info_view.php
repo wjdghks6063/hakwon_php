@@ -232,8 +232,9 @@
 				}else if(type === '50000')  {
 					number = parseInt(resultElement) + 50000;
 				}
-				total_price = total_price.toLocaleString();
+
 				mem.point.value = number;
+
 			}
 /* 버튼으로 숫자 더하기 원본
 

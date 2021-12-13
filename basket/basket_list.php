@@ -52,15 +52,7 @@
 		}
 	}
 	function goCheckDelete(){
-		if(confirm("선택한 상품을 장바구니에서 제외 하시겠습니까?")){
-			price_form.t_orderno.value=orderno;
-			price_form.method="post";
-			price_form.action="db_basket_delete.php";
-	//		price_form.submit();
-		}
-	}
-	function goCheckbuy(){
-		if(typeof(notiArr.elements['t_check[]'].length)!="undefined"){ //배열이 돌기 때문에 type은 number가 나온다. type이 undefined 가 아닌 경우
+		if(typeof(notiArr.elements['t_check[]'].length)!="undefined"){ //type이 undefined 가 아닌 경우 실행 / 배열이 돌기 때문에 type은 number가 나온다. 
 			var chkCount =0; //체크 카운트 생성
 			var len = notiArr.elements['t_check[]'].length; //배열의 길이 (숫자로 표시)
 				for(var k=0;k<len;k++){
@@ -78,10 +70,40 @@
                     return;
 				}
 			}
-		if(confirm("선택한 상품을 구매 하시겠습니까?")){		
+		if(confirm("선택한 상품들을 장바구니에서 제외 하시겠습니까?")){
+			notiArr.method="post";
+			notiArr.action="db_delete_basket.php";
+			notiArr.submit();
+		}
+	}
+	function goCheckbuy(){
+		if(typeof(notiArr.elements['t_check[]'].length)!="undefined"){ //type이 undefined 가 아닌 경우 실행 / 배열이 돌기 때문에 type은 number가 나온다. 
+			var chkCount =0; //체크 카운트 생성
+			var len = notiArr.elements['t_check[]'].length; //배열의 길이 (숫자로 표시)
+				for(var k=0;k<len;k++){
+					if(notiArr.elements['t_check[]'][k].checked==true){ //배열의 체크값 만큼 카운트가 1씩 올라간다. ex) 2개 체크시 +2
+                        chkCount++;
+                    }
+                }
+				if(chkCount==0){ //배열에 체크가 없는 경우 /카운트 0
+                    alert("상품을 선택해 주세요.");
+                    return;
+                }
+			}else{
+				if(notiArr.elements['t_check[]'].checked==false){ //1개밖에 존재하지않아 배열이 없는 경우엔 배열인 [k]을 빼고 체크 여부가 false(비체크) 인 경우
+					alert("상품을 선택해 주세요.");
+                    return;
+				}
+			}
+		if(confirm("선택한 상품을 구매 하시겠습니까?")){
+			alert(notiArr.elements['t_price[]']);
+			if($point){
+
+			}else{
 				notiArr.method="post";
 				notiArr.action="db_buy_basket.php";
-				notiArr.submit();
+	//			notiArr.submit();
+			}	
 		}
 	}
 
@@ -110,7 +132,7 @@
 			</div>
 			
 			<!-- table start-->
-		<div style="float: right; padding: 20px 50px; font: size 14px;">내 포인트 : <?=$point['point']?> \</div>
+		<div style="float: right; padding: 20px 50px; font: size 14px;">내 포인트 :<?= number_format($point['point'])?> \</div>
 			<div class="table-box">
 				<table class="table">
 					<caption>공지사항 - 번호, 제목, 첨부, 작성일, 조회수</caption>
@@ -127,7 +149,7 @@
 					
 					<thead>
 						<tr>
-							<th scope="col"><input type="checkbox" id="cbx_chkAll"></th>
+							<th scope="col"><input type="checkbox" id="cbx_chkAll" autocomplete="off"></th>
 							<th scope="col">사진</th>
 							<th scope="col">제품명</th>
 							<th scope="col">구매 수량</th>
@@ -149,11 +171,11 @@
 					<input type="hidden" name="t_price[]" value="<?=$row["price"]?>"> <!--제품 가격-->
 					<input type="hidden" name="t_price_code[]" value="<?=$row["price_code"]?>">	<!--제품 코드-->
 					<tr>
-						<td><input type="checkbox" name="t_check[]" size="3" value=""></td>		
+						<td><input type="checkbox" name="t_check[]" id="t_check" size="3" value="<?=$row["orderno"]?>" autocomplete="off"></td>	<!--autocomplete="off" 자동완성기능 해제 -->	
 						<td><a href="javascript:goView('<?=$row["no"]?>')"><span class="img"><img class="mini_img" src="/file_room/shop/<?=$row["attach"]?>" alt="shop1"></span></a></td>
 						<td><a href="javascript:goView('<?=$row["no"]?>')"><?=$row["title"]?></td>
 						<td><?=$row["price_num"]?></td>
-						<td><?=number_format($row["price_num"]*$row["price"])?></td><!--number_format으로 숫자값에 ,를 찍어준다.-->
+						<td><?=number_format($row["price"])?><br><br><?=number_format($row["price_num"]*$row["price"])?></td><!--number_format으로 숫자값에 ,를 찍어준다.-->
 						<td><?=$row["reg_date"]?></td>
 						<td><?=$row["shop_name"]?></td>
 						<td><a href="javascript:goDelete('<?=$row["orderno"]?>')"><i class="fas fa-trash"></i></a></td>
@@ -165,13 +187,13 @@
 						
 						$(document).ready(function() {
 							$("#cbx_chkAll").click(function() { //<input type="checkbox" id="cbx_chkAll"> 가 체크 될 때 작동한다.
-								if($("#cbx_chkAll").is(":checked")) $(".table input[name=t_check]").prop("checked", true); // 전체 체크가 체크 되었다면 input type 이름이 t_check인 것들은 checked 값이 ture(체크)가 된다.
-								else $(".table input[name=t_check]").prop("checked", false); //input name이 중복 된다면 범위를 지정할수도 있다. .table input[name=t_chkbox] 이런식으로 테이블 범위로만  한정할 수도 있다.
+								if($("#cbx_chkAll").is(":checked")) $(".table input[id=t_check]").prop("checked", true); // 전체 체크가 체크 되었다면 input type 이름이 t_check인 것들은 checked 값이 ture(체크)가 된다.
+								else $(".table input[id=t_check]").prop("checked", false); //input id가 중복 된다면 범위를 지정할수도 있다. .table input[id=t_check] 이런식으로 테이블 범위로만  한정할 수도 있다.
 							});
 							
-							$(".table input[name=t_check]").click(function() {
-								var total = $(".table input[name=t_check]").length;
-								var checked = $(".table input[name=t_check]:checked").length;
+							$(".table input[id=t_check]").click(function() { //input name으로 줬었는데 checkbox가 배열로 바뀌면서 name=t_check 나 t_check[] 둘다 인식하지 못해 id로 바꿔줌
+								var total = $(".table input[id=t_check]").length;
+								var checked = $(".table input[id=t_check]:checked").length;
 
 								if(total != checked) $("#cbx_chkAll").prop("checked", false);
 								else $("#cbx_chkAll").prop("checked", true); 
