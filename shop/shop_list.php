@@ -66,7 +66,7 @@
 						<a href="javascript:goView('<?=$row["no"]?>')">
 							<span class="img"><img src="/file_room/shop/<?=$row["attach"]?>" alt="shop1"></span>
 							<p class="title_price"><?=$row["title"]?></p>
-							<p class="title_price"><?=$row["price"]?> 원</p>
+							<p class="title_price"><a style="color:#DB0000;"><?=$row["price"]?></a> 원 &nbsp&nbsp 수량 : <?=$row["stuff_number"]?> 개</p>
 		
 							<span class="size-up"></span>
 						</a>
@@ -76,7 +76,7 @@
 						<a href="javascript:goView('<?=$row["no"]?>')">
 							<span class="img"><img src="/file_room/shop/<?=$row["attach"]?>" alt="shop1"></span>
 							<p class="title_price"><?=$row["title"]?></p>
-							<p class="title_price"><?=$row["price"]?> 원</p>
+							<p class="title_price"><a style="color:#DB0000;"><?=$row["price"]?></a> 원 &nbsp&nbsp 수량 : <?=$row["stuff_number"]?> 개</p>
 		
 							<span class="size-up"></span>
 						</a>

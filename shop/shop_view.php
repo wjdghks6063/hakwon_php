@@ -301,6 +301,13 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 
 								var t_price_name = "<?=$row["title"]?>";
 
+								var stuff_number = "<?=$row["stuff_number"]?>";
+
+								if(stuff_number == 0){
+									alert("품절입니다.");
+									return;
+								}
+
 								if(id ==""){
 									alert("로그인 후 이용 가능합니다.");
 									return;
@@ -341,6 +348,13 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 								var t_price_num = $("#price_num").val(); //css 처럼 id="price_num"의 value를 가져온다.
 
 								var t_price_name = "<?=$row["title"]?>";
+
+								var stuff_number = "<?=$row["stuff_number"]?>";
+
+								if(stuff_number == 0){
+									alert("품절입니다.");
+									return;
+								}
 
 								if(id ==""){
 									alert("로그인 후 이용 가능합니다.");
