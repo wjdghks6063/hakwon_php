@@ -5,7 +5,7 @@
 /**************************page setting********************************/
 /*pagingSetting.php와 같은 변수명으로 사용해야 작동 하기 때문에 양쪽의 변수명을 맞춰준다. */
 
-	$countTotal =" select * from h_member "; /*페이지를 정할 db 명 */ 
+	$countTotal =" select * from h_member where exit_yn='y' "; /*페이지를 정할 db 명 */ 
 	$countOnePage = "10"; // 한 페이지당 보여줄 목록 수 (?)행 보여주겠다.
 	$perblock = 5;		 // 한 페이지당 보여줄 페이지 번호 수 < 1 2 3 4 5 >
 
@@ -112,9 +112,6 @@
 			<?for($k=0;$k<$count;$k++){ //압축되어있는 놈을 한줄씩한줄씩 뺴서 로우에 담는다
 						$row = mysqli_fetch_array($result);
 			?>	
-				<?if($row["exit_yn"] == 'n'){ ?>	
-					<!-- 회원 탈퇴한 회원은 표시하지 않는다. -->
-					<?}else{?>
 					<tr>
 						<td><?=$row["id"]?></td>		
 						<td><a href="javascript:goView('<?=$row["id"]?>')"><?=$row["name"]?></a></td>
@@ -131,7 +128,6 @@
 						<td><a href="javascript:goDelete('<?=$row["id"]?>')"><span class="waiting">계정 삭제</span></a></td>
 				<?}?>
 
-				<?}?>
 			<?}?>
 					</tr>	
 					</tbody>

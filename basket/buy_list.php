@@ -39,11 +39,11 @@
 		pageForm.submit();
 	}
 	function goDelete(orderno){
-		if(confirm("구매목록에서 제외 하시겠습니까?")){
-			notiArr.t_orderno.value=orderno;
-			notiArr.method="post";
-			notiArr.action="db_buy_list_one_delete.php";
-			notiArr.submit();
+		if(confirm("선택한 상품을 장바구니에서 제외 하시겠습니까?")){
+			delete_form.t_orderno.value= orderno;
+			delete_form.method="post";
+			delete_form.action="db_buy_list_one_delete.php";
+			delete_form.submit();
 		}
 	}
 	function goCheckDelete(){
@@ -59,12 +59,12 @@
                     alert("상품을 선택해 주세요.");
                     return;
                 }
-			}else{
-				if(notiArr.elements['t_check[]'].checked==false){ //1개밖에 존재하지않아 배열이 없는 경우엔 배열인 [k]을 빼고 체크 여부가 false(비체크) 인 경우
-					alert("상품을 선택해 주세요.");
-                    return;
-				}
+		}else{
+			if(notiArr.elements['t_check[]'].checked==false){ //1개밖에 존재하지않아 배열이 없는 경우엔 배열인 [k]을 빼고 체크 여부가 false(비체크) 인 경우
+				alert("상품을 선택해 주세요.");
+				return;
 			}
+		}
 			
 		if(confirm("선택한 상품들을 장바구니에서 제외 하시겠습니까?")){
 			notiArr.method="post";
@@ -73,6 +73,10 @@
 		}
 	}
 </script>
+
+<form name="delete_form">
+	<input type="hidden" name="t_orderno">
+</form>
 
 <form name="view">
 	<input type="hidden" name="t_no">

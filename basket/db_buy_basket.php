@@ -27,6 +27,6 @@
 ?>
 <script>
     alert("<?=$msg?>");
-//    location.href="basket_list.php";
+    location.href="basket_list.php";
 </script>
 

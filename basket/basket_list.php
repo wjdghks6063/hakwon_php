@@ -43,14 +43,25 @@
 		pageForm.action ="basket_list.php";
 		pageForm.submit();
 	}
+	/*
 	function goDelete(orderno){
 		if(confirm("장바구니에서 제외 하시겠습니까?")){
-			notiArr.t_orderno.value=orderno;
+			notiArr.t_orderno.value= orderno;
 			notiArr.method="post";
 			notiArr.action="db_basket_one_delete.php";
 			notiArr.submit();
 		}
 	}
+	*/
+	function goDelete(orderno){
+		if(confirm("선택한 상품을 장바구니에서 제외 하시겠습니까?")){
+			delete_form.t_orderno.value= orderno;
+			delete_form.method="post";
+			delete_form.action="db_basket_one_delete.php";
+			delete_form.submit();
+			
+		}
+	}	
 	/*물건 체크 삭제 */
 	function goCheckDelete(){
 		if(typeof(notiArr.elements['t_check[]'].length)!="undefined"){ //type이 undefined 가 아닌 경우 실행 / 배열이 돌기 때문에 type은 number가 나온다. 
@@ -100,16 +111,18 @@
                     alert("상품을 선택해 주세요.");
                     return;
                 }
-		}else{ // 배열이 아닌 경우로 처리했으나 아래 배열이 아닌경우를 만들어 두어 필요하지 않음
+		}
+	/*	else{ // 배열이 아닌 경우로 처리했으나 아래 배열이 아닌경우를 만들어 두어 필요하지 않음
 			if(notiArr.elements['t_check[]'].checked==false){ //1개밖에 존재하지않아 배열이 없는 경우엔 배열인 [k]을 빼고 체크 여부가 false(비체크) 인 경우
 				alert("상품을 선택해 주세요.");
 				return;
 			}
 		}
-		
-/* 상품 배열이 1개인 경우가 작동하지 않아 만들었으나 정상 작동됨 물건이 1개인 경우가 작동하지 않는다면 위의 else부분을 주석처리하고 이걸 작동시키면 됨
+	*/
 
-		/*상품이 1개인 경우 //배열로 돌지 않는 경우 
+/* 상품 배열이 1개인 경우 배열이 돌지 않아 상품 총액이 0원으로 기입되 결제가 되기 때문에 1개인 경우를 만들어 줌*/
+
+		/*상품이 1개인 경우 //배열로 돌지 않는 경우 */
 		if(typeof(notiArr.elements['t_check[]'].length) == "undefined"){ //type이 undefined 가 아닌 경우 실행 / 배열이 돌기 때문에 type은 number가 나온다. 
 
 			if(notiArr.elements['t_check[]'].checked==true){ //체크가 되어 있는 경우
@@ -123,7 +136,7 @@
 			}
 				
 		}
-*/		
+		
 		if(confirm("선택한 상품을 구매 하시겠습니까?")){
 			var now_point = "<?=$point['point']?>"; //포인트를 배열에서 빼내서 변수로 만듬
 			if(total_price>now_point){ //포인트보다 총 구매 금액이 높을 경우
@@ -143,6 +156,9 @@
 	}
 
 </script>
+<form name="delete_form">
+	<input type="hidden" name="t_orderno">
+</form>
 
 <form name="view">
 	<input type="hidden" name="t_no">

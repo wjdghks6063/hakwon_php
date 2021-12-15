@@ -224,7 +224,12 @@ function checkcount(obj) { //onkeyup="checkcount(this)" 으로 키값이 들어 
 			<!-- sub-news start-->			
 			<div class="contnews">
 				<!--상품 사진-->
-					<span class="img"><img src="/file_room/shop/<?=$row["attach"]?>" alt="뉴스1" class="img" "></span>	
+					<span class="img">
+					<?if(!$row["stuff_number"])	{?> <!--상품의 수량이 없는 경우-->
+						<img src="../images/line.png" class="img2">
+					<?}?>	
+						<img src="/file_room/shop/<?=$row["attach"]?>" alt="뉴스1" class="img" "></span>
+				<!--	<span class="line-size-up"></span>	-->
 					<!--상품 상세 설명란 -->
 				<div class ="price-box">
 					<h3><?=$row["title"]?><br>
