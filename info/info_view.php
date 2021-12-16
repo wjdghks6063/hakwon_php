@@ -79,11 +79,14 @@
 
 		<!-- sub page start -->
 		<div class="notice">
-		<div class="sub-notice">
-			<h2><a href="/info/myinfo_view.php">MY INFO</a></h2>	
-			<h2 class="color"><a href="/info/info_list.php"><i class="fas fa-check"></i>MEMBER INFO</a></h2>
-			<h2><a href="/info/exit_list.php">EXIT INFO</a></h2>	
-			</div>
+			<div class="sub-notice">
+				<h2><a href="/info/myinfo_view.php">내 정보</a></h2>	
+		<?	if($session_level == 'top') { ?>
+				<h2 class="color"><a href="/info/info_list.php"> <i class="fas fa-check"></i>회원 정보</a></h2>
+				<h2><a href="/info/exit_list.php">탈퇴 정보</a></h2>
+				<h2><a href="/info/point_charge_waiting.php">충전 요청</a></h2>	
+		<?	} ?>
+		</div>
 			
 		<!--join start-->
 			<div class="join-box">
@@ -217,20 +220,20 @@
 
 			function count(type)  {
 				// 결과를 표시할 element
-				const resultElement = mem.point.value;
+				const point = mem.point.value;
 				
 				// 현재 화면에 표시된 값
-				let number = Number(resultElement);
+				let number = Number(point);
 				
 				// 더하기
 				if(type === '100') {
-					number = parseInt(resultElement) + 100;
+					number = parseInt(point) + 100;
 				}else if(type === '1000')  {
-					number = parseInt(resultElement) + 1000;
+					number = parseInt(point) + 1000;
 				}else if(type === '10000')  {
-					number = parseInt(resultElement) + 10000;
+					number = parseInt(point) + 10000;
 				}else if(type === '50000')  {
-					number = parseInt(resultElement) + 50000;
+					number = parseInt(point) + 50000;
 				}
 
 				mem.point.value = number;

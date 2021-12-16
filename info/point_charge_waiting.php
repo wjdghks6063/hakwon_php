@@ -5,7 +5,7 @@
 /**************************page setting********************************/
 /*pagingSetting.php와 같은 변수명으로 사용해야 작동 하기 때문에 양쪽의 변수명을 맞춰준다. */
 
-	$countTotal =" select * from h_member where exit_yn='n' "; /*페이지를 정할 db 명 */ 
+	$countTotal =" select * from h_member where exit_yn='y' "; /*페이지를 정할 db 명 */ 
 	$countOnePage = "10"; // 한 페이지당 보여줄 목록 수 (?)행 보여주겠다.
 	$perblock = 5;		 // 한 페이지당 보여줄 페이지 번호 수 < 1 2 3 4 5 >
 
@@ -13,11 +13,11 @@
 	$t_page =$_POST['t_page']; // view에 갔다가 목록이나 뒤로 가기를 했을 때 현재 페이징 넘버로 가질 수 있게 해준다.
 /**********************************************************************/
 
-	$query ="select id, name, email_1, email_2, date_format(reg_date,'%Y-%m-%d') as reg_date, FORMAT(point , 0) as point, exit_yn, level from  h_member ".
-			"where exit_yn = 'n' ".
-			"order by reg_date desc ".
+	$query ="SELECT a.no, b.name, a.id, a.title, a.now_point, a.use_point, b.point, a.reg_date, a.use_list FROM h_point a, h_member b ".
+			"where a.id = b.id ".
+			"and use_list = 'waiting' ".
+			"order by no desc ".
 			"limit $start, $end ";
-
 	$result = mysqli_query($connect,$query);
 										
 	$count = mysqli_num_rows($result); 
@@ -29,7 +29,7 @@
 		location.href="/";
 	</script>
 <?	
-}
+	}
 ?>	
 		<!--  header end -->
 <script>
@@ -42,21 +42,19 @@
 	function goPage(pageNumber){		
 		pageForm.t_page.value = pageNumber;
 		pageForm.method ="post";
-		pageForm.action ="info_list.php";
+		pageForm.action ="exit_list.php";
 		pageForm.submit();
 	}
-	function goExit(id){
-		if(confirm("정말 탈퇴시키겠습니까?")){
-		info.t_id.value=id;
-		info.method="post";
-		info.action="/member/db_top_exit.php";
-		info.submit();
-		}
+	function goCharge(no){
+		gocharge.t_no.value= no;
+		gocharge.method="post";
+		gocharge.action="db_point_charge.php";
+		gocharge.submit();
 	}
 </script>
 
-<form name="info">
-	<input type="hidden" name="t_id" ">
+<form name="gocharge">
+	<input type="hidden" name="t_no" >
 </form>
 
 <form name ="pageForm">
@@ -66,11 +64,11 @@
 		<!-- sub page start -->
 		<div class="notice">
 			<div class="sub-notice">
-				<h2><a href="/info/myinfo_view.php">내 정보</a></h2>	
+			<h2><a href="/info/myinfo_view.php">내 정보</a></h2>	
 		<?	if($session_level == 'top') { ?>
-				<h2 class="color"><a href="/info/info_list.php"> <i class="fas fa-check"></i>회원 정보</a></h2>
-				<h2><a href="/info/exit_list.php">탈퇴 정보</a></h2>
-				<h2><a href="/info/point_charge_waiting.php">충전 요청</a></h2>	
+			<h2><a href="/info/info_list.php">회원 정보</a></h2>
+			<h2><a href="/info/exit_list.php">탈퇴 정보</a></h2>
+			<h2 class="color"><a href="/info/point_charge_waiting.php"><i class="fas fa-check"></i>충전 요청</a></h2>	
 		<?	} ?>
 			</div>
 			
@@ -80,24 +78,24 @@
 					<caption>공지사항 - 번호, 제목, 첨부, 작성일, 조회수</caption>
 					<colgroup>
 						<col width="12%">
-						<col width="12%">
+						<col width="10%">
 						<col width="*%">
 						<col width="15%">
 						<col width="12%">
-						<col width="15%">
+						<col width="10%">
 						<col width="10%">
 					</colgroup>
 					
 					<thead>
-						<tr>
-							<th scope="col">id</th>
-							<th scope="col">성함</th>
-							<th scope="col">이메일</th>
-							<th scope="col">회원 가입일</th>
-							<th scope="col">등급</th>
-							<th scope="col">포인트</th>
-							<th scope="col">회원 탈퇴</th>
-						</tr>
+					<tr>
+						<th scope="col">id</th>
+						<th scope="col">이름</th>
+						<th scope="col">요청 내역</th>
+						<th scope="col">요청 일자</th>
+						<th scope="col">포인트</th>
+						<th scope="col">충전 포인트</th>
+						<th scope="col">충전</th>
+					</tr>
 					</thead>
 					
 					<tbody>
@@ -107,16 +105,12 @@
 					<tr>
 						<td><?=$row["id"]?></td>		
 						<td><a href="javascript:goView('<?=$row["id"]?>')"><?=$row["name"]?></a></td>
-						<td><?=$row["email_1"]?>@<?=$row["email_2"]?></td>
+						<td><?=$row["title"]?></td>
 						<td><?=$row["reg_date"]?></td>
-				<?if($row["level"] == 'top'){ ?>	
-						<td><span style="color:#FF0000"><?=$row["level"]?></span></a></td>
-				<?}else{?>
-						<td><?=$row["level"]?></td>
-				<?}?>	
 						<td><?=$row["point"]?></td>
+						<td><?=$row["use_point"]?></td>
 				<?if($session_level == 'top'){ ?>
-						<td><a href="javascript:goExit('<?=$row["id"]?>')"><span class="waiting">회원 탈퇴</span></a></td>
+						<td><a href="javascript:goCharge('<?=$row["no"]?>')"><span class="complet">충전</span></a></td>
 				<?}?>
 
 			<?}?>
@@ -143,8 +137,6 @@
 			</div>
 		
 		</div>
-		
-		
 		
 		<!--  footer start  -->
 	<?

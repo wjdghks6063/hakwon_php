@@ -4,7 +4,7 @@
     $no = $_POST["t_no"];
 	$t_page = $_POST["t_page"];
 
-    $query="select a.title, a.content, a.attach, b.name,a.reg_id, a.reg_date from h_shop a, h_member b where a.reg_id = b.id and a.no='$no'";
+    $query="select a.title, a.content, a.attach, a.stuff_number, b.name, a.reg_id, a.reg_date from h_shop a, h_member b where a.reg_id = b.id and a.no='$no'";
     $result = mysqli_query($connect,$query);
 	$row = mysqli_fetch_array($result);
     if($session_level !="top"){
@@ -58,6 +58,11 @@
 							<tr>
 								<th><label for="cont">상세 정보</label></th>
 								<td><textarea type="cont" name="t_content" value="<?=$row["content"]?>" class="cont"><?=$row["content"]?></textarea>
+							</tr>
+							<tr>
+								<th><label for="title">제품 수량</label></th>
+								<td><input type="text" name="t_stuff_number" id="number" value="<?=$row["stuff_number"]?>" class="number" placeholder="수량을 입력해주세요."
+									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"></td>
 							</tr>
 						<style>
                             .img img{
@@ -171,8 +176,9 @@
 				return;
 			}	
 		}
-                if(checkValue(shop.t_title,"제목입력!")) return;
-                if(checkValue(shop.t_content,"내용입력!")) return;
+                if(checkValue(shop.t_title,"제목을 입력해 주세요.")) return;
+                if(checkValue(shop.t_content,"내용을 입력해 주세요.")) return;
+				if(checkValue(shop.t_stuff_number,"수량을 입력해주세요.")) return;
                 shop.method="post";
                 shop.action="db_shop_update.php";
                 shop.submit();

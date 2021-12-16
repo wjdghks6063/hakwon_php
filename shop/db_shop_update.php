@@ -26,12 +26,14 @@
 		$title 	 = addslashes($_POST["t_title"]); //addslashes();는  '' , "" 같은 특수문자도 db에 넣을 수 있게 해준다.
 		$content = addslashes($_POST["t_content"]);
 		$reg_id  = $_SESSION["session_id"];
+		$stuff_number = $_POST["t_stuff_number"];
 		$reg_date_time = date("Y-m-d H:i:s", time());	
 		
 		$query ="update h_shop ".
 				" set title='$title', ".
 				" 	content='$content', ".
 				"   attach='$attach_db_name', ".
+				"   stuff_number='$stuff_number', ".
 				"   reg_id ='$reg_id', ".
 				"   reg_date='$reg_date_time' ".
 				" where no = $no";

@@ -21,11 +21,13 @@
 		<div class="notice">
 			<div class="sub-notice">
 				<h2 class="color"><a href="/info/myinfo_view.php"><i class="fas fa-check"></i>내 정보</a></h2>
-				<h2><a href="/info/point_charge.php">포인트 충전</a></h2>
-				<h2><a href="/info/info_list.php">포인트 사용 내역</a></h2>
-				<?	if($session_level == 'top') { ?>
+			<?	if($session_level != 'top') { ?>	
+				<h2><a href="/info/point_charge.php">포인트 충전,내역</a></h2>
+			<?	} ?>	
+			<?	if($session_level == 'top') { ?>
 				<h2><a href="/info/info_list.php">회원 정보</a></h2>
-				<h2><a href="/info/exit_list.php">탈퇴 정보</a></h2>	
+				<h2><a href="/info/exit_list.php">탈퇴 정보</a></h2>
+				<h2><a href="/info/point_charge_waiting.php">충전 요청</a></h2>
 			<?	} ?>
 			</div>
 			

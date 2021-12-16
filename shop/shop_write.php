@@ -44,12 +44,12 @@
 							</tr>
 
 							<tr>
-								<th><label for="title">물품 수량</label></th>
+								<th><label for="title">제품 수량</label></th>
 								<td><input type="text" name="t_stuff_number" id="number" class="number" placeholder="수량을 입력해주세요."
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"></td>
 							</tr>
 							<tr>
-								<th><label for="title">물품 가격</label></th>
+								<th><label for="title">제품 가격</label></th>
 								<td><input type="text" name="t_price" id="number" class="number" placeholder="가격을 입력해주세요."
 									oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1')"></td>
 							</tr>
@@ -81,7 +81,7 @@
 
 							</table>
 					</fieldset>
-				</form>
+			</form>
 			</div>
 			
 
