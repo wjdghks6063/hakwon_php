@@ -18,9 +18,9 @@
     $reg_date_time = date("y-m-d h:i:s", time());
 
     $query ="insert into h_point ".
-    "(no, id, title, use_point, now_point, reg_date, use_list) ".
+    "(no, id, title, use_point, reg_date, use_list) ".
     "values ".
-    "('$maxNo','$id','포인트 충전 이용','$use_point','$now_point','$reg_date_time','waiting') ";
+    "('$maxNo','$id','포인트 충전 이용','$use_point','$reg_date_time','waiting') ";
 
         echo $query;
         

@@ -5,7 +5,7 @@
 /**************************page setting********************************/
 /*pagingSetting.php와 같은 변수명으로 사용해야 작동 하기 때문에 양쪽의 변수명을 맞춰준다. */
 
-	$countTotal =" select * from h_basket "; /*페이지를 정할 db 명 */ 
+	$countTotal =" select * from h_basket where id ='$session_id' "; /*페이지를 정할 db 명 */ 
 	$countOnePage = "10"; // 한 페이지당 보여줄 목록 수 (?)행 보여주겠다.
 	$perblock = 5;		 // 한 페이지당 보여줄 페이지 번호 수 < 1 2 3 4 5 >
 
@@ -177,7 +177,6 @@
 			</div>
 			
 			<!-- table start-->
-		<div style="float: right; padding: 20px 50px; font: size 14px;">내 포인트 :<?= number_format($point['point'])?> \</div>
 			<div class="table-box">
 				<table class="table">
 					<caption>공지사항 - 번호, 제목, 첨부, 작성일, 조회수</caption>
@@ -191,8 +190,10 @@
 						<col width="12%">
                         <col width="5%">
 					</colgroup>
-					
+
+<!--보유 포인트 -->	<div style="float: right; padding: 0px 10px 20px; font: size 14px;">내 포인트 : <?= number_format($point['point'])?> \</div>
 					<thead>
+						
 						<tr>
 							<th scope="col"><input type="checkbox" id="cbx_chkAll" autocomplete="off"></th>
 							<th scope="col">사진</th>
@@ -215,6 +216,7 @@
 					<input type="hidden" name="t_price_num[]" value="<?=$row["price_num"]?>"> <!--제품 수량-->
 					<input type="hidden" name="t_price[]" value="<?=$row["price"]?>"> <!--제품 가격-->
 					<input type="hidden" name="t_price_code[]" value="<?=$row["price_code"]?>">	<!--제품 코드-->
+					<input type="hidden" name="t_price_name[]" value="<?=$row["title"]?>">	<!--제품 명 -->
 					<tr>
 						<td><input type="checkbox" name="t_check[]" id="t_check" size="3" value="<?=$row["orderno"]?>" autocomplete="off"></td>	<!--autocomplete="off" 자동완성기능 해제 /페이지 뒤로 이동 눌를시 체크 상태 해제를 위해 넣음 -->	
 						<td><a href="javascript:goView('<?=$row["no"]?>')"><span class="img"><img class="mini_img" src="/file_room/shop/<?=$row["attach"]?>" alt="shop1"></span></a></td>

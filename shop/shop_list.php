@@ -5,7 +5,7 @@
 /**************************page setting********************************/
 	/*pagingSetting.php와 같은 변수명으로 사용해야 작동 하기 때문에 양쪽의 변수명을 맞춰준다. */
 
-	$countTotal =" select * from h_shop "; /*페이지를 정할 db 명 */ 
+	$countTotal ="select * from h_shop "; /*페이지를 정할 db 명 */ 
 	$countOnePage = "9"; // 한 페이지당 보여줄 목록 수 (?)행 보여주겠다.
 	$perblock = 5;		 // 한 페이지당 보여줄 페이지 번호 수 < 1 2 3 4 5 >
 

@@ -13,7 +13,7 @@
 	$t_page =$_POST['t_page']; // view에 갔다가 목록이나 뒤로 가기를 했을 때 현재 페이징 넘버로 가질 수 있게 해준다.
 /**********************************************************************/
 
-	$query ="SELECT a.no, b.name, a.id, a.title, a.now_point, a.use_point, b.point, a.reg_date, a.use_list FROM h_point a, h_member b ".
+	$query ="SELECT a.no, b.name, a.id, a.title, a.use_point, b.point, a.reg_date, a.use_list FROM h_point a, h_member b ".
 			"where a.id = b.id ".
 			"and use_list = 'waiting' ".
 			"order by no desc ".
@@ -45,16 +45,22 @@
 		pageForm.action ="exit_list.php";
 		pageForm.submit();
 	}
-	function goCharge(no){
+	function goCharge(no,id,use_point){
+		if(confirm("포인트를 충전시키겠습니까?")){
 		gocharge.t_no.value= no;
+		gocharge.t_id.value= id;
+		gocharge.t_use_point.value= use_point;
 		gocharge.method="post";
 		gocharge.action="db_point_charge.php";
 		gocharge.submit();
+		}
 	}
 </script>
 
 <form name="gocharge">
 	<input type="hidden" name="t_no" >
+	<input type="hidden" name="t_id" >
+	<input type="hidden" name="t_use_point">
 </form>
 
 <form name ="pageForm">
@@ -82,8 +88,8 @@
 						<col width="*%">
 						<col width="15%">
 						<col width="12%">
-						<col width="10%">
-						<col width="10%">
+						<col width="12%">
+						<col width="8%">
 					</colgroup>
 					
 					<thead>
@@ -92,8 +98,8 @@
 						<th scope="col">이름</th>
 						<th scope="col">요청 내역</th>
 						<th scope="col">요청 일자</th>
-						<th scope="col">포인트</th>
-						<th scope="col">충전 포인트</th>
+						<th scope="col">현재 포인트</th>
+						<th scope="col">충전 요청 포인트</th>
 						<th scope="col">충전</th>
 					</tr>
 					</thead>
@@ -108,9 +114,9 @@
 						<td><?=$row["title"]?></td>
 						<td><?=$row["reg_date"]?></td>
 						<td><?=$row["point"]?></td>
-						<td><?=$row["use_point"]?></td>
+						<td>+ <?=$row["use_point"]?></td>
 				<?if($session_level == 'top'){ ?>
-						<td><a href="javascript:goCharge('<?=$row["no"]?>')"><span class="complet">충전</span></a></td>
+						<td><a href="javascript:goCharge('<?=$row["no"]?>','<?=$row["id"]?>','<?=$row["use_point"]?>') "><span class="complet">충전</span></a></td>
 				<?}?>
 
 			<?}?>

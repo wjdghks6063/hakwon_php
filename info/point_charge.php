@@ -5,7 +5,7 @@
 /**************************page setting********************************/
 /*pagingSetting.php와 같은 변수명으로 사용해야 작동 하기 때문에 양쪽의 변수명을 맞춰준다. */
 
-	$countTotal =" select * from h_member "; /*페이지를 정할 db 명 */ 
+	$countTotal ="select * from h_point where id ='$session_id' "; /*페이지를 정할 db 명 */ 
 	$countOnePage = "10"; // 한 페이지당 보여줄 목록 수 (?)행 보여주겠다.
 	$perblock = 5;		 // 한 페이지당 보여줄 페이지 번호 수 < 1 2 3 4 5 >
 
@@ -13,13 +13,12 @@
 	$t_page =$_POST['t_page']; // view에 갔다가 목록이나 뒤로 가기를 했을 때 현재 페이징 넘버로 가질 수 있게 해준다.
 /**********************************************************************/
 
-	$query ="SELECT a.no, a.id, a.title, a.now_point, a.use_point, b.point, a.reg_date, a.use_list FROM h_point a, h_member b ".
+	$query ="SELECT a.no, a.id, a.title, a.use_point, a.reg_date, a.use_list FROM h_point a, h_member b ".
 			"where a.id = b.id ".
 			"and a.id = '$session_id' ".
 			"order by no desc ".
 			"limit $start, $end ";
-	$result = mysqli_query($connect,$query);
-										
+	$result = mysqli_query($connect,$query);	
 	$count = mysqli_num_rows($result); 
 
 	$pointquery ="SELECT a.point from h_member a ".
@@ -57,6 +56,7 @@
 			</div>
 			
 			<!-- table start-->
+			
 			<div class="table-box">
 				<table class="table">
 					<caption>공지사항 - 번호, 제목, 첨부, 작성일, 조회수</caption>
@@ -65,16 +65,16 @@
 						<col width="*%">
 						<col width="15%">
 						<col width="12%">
-						<col width="10%">
 					</colgroup>
-					
+
+<!--보유 포인트 -->	<div style="float: right; padding: 0px 10px 20px; font: size 14px;">내 포인트 : <?= number_format($point['point'])?> \</div>
+
 					<thead>
 						<tr>
 							<th scope="col">요청 사항</th>
 							<th scope="col">이용 내역</th>
 							<th scope="col">이용 일자</th>
 							<th scope="col">포인트</th>
-							<th scope="col">남은 포인트</th>
 						</tr>
 					</thead>
 					
@@ -90,8 +90,8 @@
 				<?}else{?>
 						<td><span style="color: #ccc;"><?=$row["use_list"]?></span></td>	
 				<?}?>
-			
-						<td><?=$row["title"]?></td>
+
+						<td>상품 구매 : <?=$row["title"]?></td>
 						<td><?=$row["reg_date"]?></td>
 
 				<?if($row["use_list"] == 'buy'){ ?>	
@@ -100,12 +100,7 @@
 						<td><span style="color:#FF0000">- <?=$row["use_point"]?></span></td>
 				<?}else{?>
 						<td><span style="color: #ccc;">(+ <?=$row["use_point"]?>)</span></td>	
-				<?}?>
-				<?if($row["use_list"] == 'waiting'){ ?>			
-						<td><?=$point['point']?></td>
-				<?}else{?>
-						<td><?=$row["now_point"]?></td>
-				<?}?>		
+				<?}?>	
 					</tr>
 					
 	<?}?>		
